@@ -1,0 +1,200 @@
+<div class="adopcion-form-wrapper">
+  <!-- Contenedor de Encabezado con Imagen de Fondo -->
+  <div class="header-container">
+    <div class="header-content">
+      <h1>Conectando humanos con sus mascotas</h1>
+      <p>¡Encuentra a tu nuevo amigo peludo!</p>
+    </div>
+  </div>
+
+  <!-- Contenedor del Formulario -->
+  <div class="adopcion-form-container card">
+    <!-- Título del formulario -->
+    <h2 class="card-title">Formulario de Adopción</h2>
+    <form (ngSubmit)="onSubmit(adopcionForm)" #adopcionForm="ngForm">
+      <!-- Edad -->
+      <div class="form-group">
+        <label>¿Cuál es tu edad?</label>
+        <select [(ngModel)]="edad" name="edad" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !edad}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="18-25">18-25</option>
+          <option value="26-35">26-35</option>
+          <option value="36-45">36-45</option>
+          <option value="46-60">46-60</option>
+          <option value="60+">60+</option>
+        </select>
+      </div>
+      
+      <!-- Ocupación -->
+      <div class="form-group">
+        <label>¿Cuál es tu ocupación?</label>
+        <select [(ngModel)]="ocupacion" name="ocupacion" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !ocupacion}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Estudiante">Estudiante</option>
+          <option value="Empleado">Empleado</option>
+          <option value="Desempleado">Desempleado</option>
+          <option value="Jubilado">Jubilado</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <!-- Experiencia con Mascotas -->
+      <div class="form-group">
+        <label>¿Tienes experiencia con mascotas?</label>
+        <select [(ngModel)]="experiencia" name="experiencia" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !experiencia}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Nunca he tenido">Nunca he tenido</option>
+          <option value="He tenido antes">He tenido antes</option>
+          <option value="Actualmente tengo">Actualmente tengo</option>
+        </select>
+      </div>
+
+      <!-- Otras Mascotas -->
+      <div class="form-group">
+        <label>¿Tienes otras mascotas en casa?</label>
+        <select [(ngModel)]="otraMascota" name="otraMascota" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !otraMascota}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- Detalles de Otras Mascotas (Condicional) -->
+      <div class="form-group" *ngIf="otraMascota === 'Sí'">
+        <label>¿Cuántas mascotas tienes?</label>
+        <select [(ngModel)]="cantidadMascotas" name="cantidadMascotas" class="form-control custom-select" required>
+          <option value="" disabled selected>Selecciona</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4+">4+</option>
+        </select>
+
+        <label>¿Qué tipo de mascotas tienes?</label>
+        <select [(ngModel)]="tipoMascota" name="tipoMascota" class="form-control custom-select" required>
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Perro">Perro</option>
+          <option value="Gato">Gato</option>
+        </select>
+      </div>
+
+      <!-- ¿Hay niños en casa? -->
+      <div class="form-group">
+        <label>¿Hay niños en casa?</label>
+        <select [(ngModel)]="ninosEnCasa" name="ninosEnCasa" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !ninosEnCasa}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="No">No</option>
+          <option value="Sí, menores de 5 años">Sí, menores de 5 años</option>
+          <option value="Sí, entre 6 y 12 años">Sí, entre 6 y 12 años</option>
+          <option value="Sí, mayores de 12 años">Sí, mayores de 12 años</option>
+        </select>
+      </div>
+
+      <!-- ¿Cuánto tiempo pasará la mascota sola en casa? -->
+      <div class="form-group">
+        <label>¿Cuánto tiempo pasará la mascota sola en casa?</label>
+        <select [(ngModel)]="tiempoSola" name="tiempoSola" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !tiempoSola}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Menos de 2 horas">Menos de 2 horas</option>
+          <option value="2-4 horas">2-4 horas</option>
+          <option value="Más de 5 horas">Más de 5 horas</option>
+        </select>
+      </div>
+
+      <!-- ¿Tiene acceso a un veterinario de confianza? -->
+      <div class="form-group">
+        <label>¿Tiene acceso a un veterinario de confianza?</label>
+        <select [(ngModel)]="veterinario" name="veterinario" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !veterinario}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- ¿Está de acuerdo en realizar visitas de seguimiento post-adopción? -->
+      <div class="form-group">
+        <label>¿Está de acuerdo en realizar visitas de seguimiento post-adopción?</label>
+        <select [(ngModel)]="visitasSeguimiento" name="visitasSeguimiento" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !visitasSeguimiento}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Sí">Sí</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+
+      <!-- Motivo de Adopción -->
+      <div class="form-group">
+        <label>¿Cuál es tu motivo para adoptar?</label>
+        <select [(ngModel)]="motivo" name="motivo" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !motivo}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Compañía">Compañía</option>
+          <option value="Protección">Protección</option>
+          <option value="Terapia">Terapia</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <!-- Tiempo Disponible -->
+      <div class="form-group">
+        <label>¿Cuánto tiempo al día podrías dedicarle a la mascota?</label>
+        <select [(ngModel)]="tiempoDisponible" name="tiempoDisponible" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !tiempoDisponible}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Menos de 2 horas">Menos de 2 horas</option>
+          <option value="2-4 horas">2-4 horas</option>
+          <option value="5+ horas">5+ horas</option>
+        </select>
+      </div>
+
+      <!-- Presupuesto Mensual en Pesos Colombianos (COP) -->
+      <div class="form-group">
+        <label>¿Cuánto podrías gastar en la mascota al mes? (COP)</label>
+        <select [(ngModel)]="presupuesto" name="presupuesto" class="form-control custom-select" required
+                [ngClass]="{'is-invalid': adopcionForm.submitted && !presupuesto}">
+          <option value="" disabled selected>Selecciona</option>
+          <option value="Menos de $100,000">Menos de $100,000</option>
+          <option value="$100,000 - $300,000">$100,000 - $300,000</option>
+          <option value="$300,000 - $500,000">$300,000 - $500,000</option>
+          <option value="Más de $500,000">Más de $500,000</option>
+        </select>
+      </div>
+
+      <!-- Acuerdo Digital -->
+      <div class="form-group terms-container">
+        <!-- Mensaje de Responsabilidad -->
+        <div class="alert alert-warning" role="alert">
+          ⚠️ <strong>Importante:</strong> La plataforma solo facilita la conexión entre adoptantes y cuidadores. No nos hacemos responsables del proceso de entrega de la mascota.
+        </div>
+
+        <!-- Términos y Condiciones -->
+        <div class="terms-container">
+          <label>
+            <input type="checkbox" [(ngModel)]="aceptaTerminos" name="aceptaTerminos" required>
+            Acepto los términos de adopción y entiendo que la plataforma solo facilita la conexión entre adoptantes y cuidadores.
+          </label>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="button-group">
+        <button type="submit" class="btn-accept" [disabled]="!aceptaTerminos || isLoading">
+          <span *ngIf="!isLoading">✔️ Enviar Solicitud</span>
+          <span *ngIf="isLoading">
+            <i class="fa fa-spinner fa-spin"></i> Procesando...
+          </span>
+        </button>
+        <button type="button" class="btn-cancel" (click)="cancelar()" [disabled]="isLoading">
+          ✖️ Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<h3>Lista de Mascotas Pendientes de Aprobación</h3>
+<div class="pet-cards-container">
+  <div *ngFor="let pet of pets" class="pet-card">
+    <div class="pet-image">
+      <!-- Mostrar la imagen de la mascota si está disponible -->
+      <img *ngIf="pet.image" [src]="pet.image" alt="Imagen de la mascota" />
+    </div>
+    <div class="pet-details">
+      <h4>{{ pet.name }} - {{ pet.type }}</h4>
+      <p><strong>Estado:</strong> {{ pet.approvalStatus }}</p>
+      <p><strong>Raza:</strong> {{ pet.breed }}</p>
+      <p><strong>Peso:</strong> {{ pet.weight }} Kg</p>
+      <p><strong>Tamaño:</strong> {{ pet.size }}</p>
+    </div>
+    <div class="pet-actions">
+      <!-- Ver detalles de la mascota -->
+      <button (click)="viewDetails(pet._id)">Ver detalles</button>
+      
+      <!-- Botones de aprobación/rechazo -->
+      <button (click)="handlePetApproval('aprobar', pet._id)" [disabled]="pet.approvalStatus !== 'pendiente'">Aprobar</button>
+      <button (click)="handlePetApproval('rechazar', pet._id)" [disabled]="pet.approvalStatus !== 'pendiente'">Rechazar</button>
+    </div>
+  </div>
+</div>

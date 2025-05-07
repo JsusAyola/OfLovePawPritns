@@ -1,0 +1,171 @@
+/* Contenedor de Registro */
+.register-container {
+    width: 90%;
+    max-width: 1140px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeInSlideUp 1s ease-in-out; /* Animación de entrada */
+}
+
+/* Imagen de Registro */
+.register-image {
+    width: 1133px;
+    height: 311.34px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    animation: zoomIn 1.2s ease; /* Animación de zoom */
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    align-items: center;
+}
+
+/* Contenedor de Entrada */
+.input-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 3px;
+    animation: slideInLeft 0.8s ease; /* Animación de entrada desde la izquierda */
+}
+
+/* Título */
+h1 {
+    color: red;
+    animation: fadeIn 1.2s ease-in-out; /* Animación de desvanecimiento */
+}
+
+/* Campos de Entrada y Selección */
+input, select {
+    width: 100%;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+    border: 1px solid red;
+    outline: none;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); /* Efecto de sombra al hacer foco */
+}
+
+/* Alternar Contraseña */
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+    color: #dc3545;
+}
+
+/* Botón de Aceptar */
+.btn-accept {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    height: 44px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-accept:hover {
+    background-color: #c82333;
+    transform: scale(1.05); /* Animación de escala en hover */
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    .register-container {
+        padding: 10px;
+    }
+
+    .register-image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Deshabilita la entrada de texto para que usen obligatoriamente el icon*/
+input[type="date"]::-webkit-outer-spin-button,
+input[type="date"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="date"] {
+  pointer-events: none; /* Desactiva la entrada de texto */
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  pointer-events: auto; /* Solo se permite hacer clic en el icono del calendario */
+}

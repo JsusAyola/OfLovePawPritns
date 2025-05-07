@@ -1,0 +1,22 @@
+<div class="pet-details-container">
+  <h2>{{ pet.name }} - {{ pet.type }}</h2>
+  <div class="back-button-container animate__animated animate__fadeInDown">
+    <button class="back-button" (click)="goBack()">Volver</button>
+</div>
+
+  <!-- Imagen de la mascota -->
+  <div class="pet-image-container">
+    <img *ngIf="pet.image" [src]="'http://localhost:5000/' + pet.image" alt="Imagen de la mascota" class="pet-image" />
+  </div>
+
+  <!-- Información de la mascota -->
+  <div class="pet-info">
+    <p><strong>Raza:</strong> {{ pet.breed || 'No especificada' }}</p>
+    <p><strong>Estado:</strong> {{ pet.status || 'No disponible' }}</p>
+    <p><strong>Edad:</strong> {{ age }} años</p>
+    <p><strong>Peso:</strong> {{ pet.weight || 'No especificado' }} kg</p>
+    <p><strong>Tamaño:</strong> {{ pet.size || 'No especificado' }}</p>
+    <p><strong>Vacunas:</strong> {{ pet.vaccines?.join(', ') || 'No especificadas' }}</p>
+    <p><strong>Cuidador:</strong> {{ pet.cuidador_id?.firstName || 'No especificado' }} {{ pet.cuidador_id?.lastName || '' }}</p>
+  </div>
+</div>

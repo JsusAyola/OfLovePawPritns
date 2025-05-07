@@ -1,0 +1,112 @@
+<div class="container-mi-cuenta">
+  <!-- Sección de botones para cambiar de sección -->
+  <div class="col-sm-12 col-md-4 mt-4 mb-4">
+    <button
+      type="button"
+      class="btn btn-account mt-2"
+      [ngClass]="{ 'btn-account-active': selectedSection === 'MiInfo', 'btn-account': selectedSection !== 'MiInfo' }"
+      (click)="accountBtn('MiInfo')"
+    >
+      Mi información
+    </button>
+    
+    <button
+      type="button"
+      class="btn btn-account mt-2"
+      [ngClass]="{ 'btn-account-active': selectedSection === 'Dashboard', 'btn-account': selectedSection !== 'Dashboard' }"
+      (click)="accountBtn('Dashboard')"
+    >
+      Dashboard
+    </button>
+    
+    <button
+      type="button"
+      class="btn btn-account mt-2"
+      [ngClass]="{ 'btn-account-active': selectedSection === 'MiPass', 'btn-account': selectedSection !== 'MiPass' }"
+      (click)="accountBtn('MiPass')"
+    >
+      Cambiar Contraseña
+    </button>
+  </div>
+
+  <!-- Sección de contenido -->
+  <div class="col-sm-12 col-md-8 mt-4 mb-4">
+    <!-- Mi Información -->
+    <div *ngIf="selectedSection === 'MiInfo'">
+      <p><i class="fas fa-user"></i> Mi cuenta</p>
+      <label for="UserName">Nombre</label>
+      <input type="text" class="form-control" [(ngModel)]="userName" />
+      
+      <label for="UserLastName">Apellido</label>
+      <input type="text" class="form-control" [(ngModel)]="userLastName" />
+      
+      <label for="UserEmail">Mail</label>
+      <input type="email" class="form-control" [(ngModel)]="userEmail" disabled />
+      
+      <label for="UserRole">Rol</label>
+      <input type="text" class="form-control" [value]="userRole" disabled />
+      
+      <!-- Campo de Teléfono para Cuidadores -->
+      <div *ngIf="userRole === 'cuidador'">
+        <label for="UserPhone">Teléfono</label>
+        <input type="text" class="form-control" [(ngModel)]="userPhone" />
+      </div>
+
+      <label for="UserAge">Edad</label>
+      <input type="text" class="form-control" [value]="userAge" disabled />
+      
+      <label for="UserRegistration">Fecha de Registro</label>
+      <input type="text" class="form-control" [value]="userRegistrationDate" disabled />
+      
+      <button type="button" class="btn-update-info" (click)="updateInfo()">ACTUALIZAR INFO</button>
+    </div>
+
+    <!-- Cambiar Contraseña -->
+    <div *ngIf="selectedSection === 'MiPass'">
+      <p><i class="fas fa-asterisk"></i> Cambiar Contraseña</p>
+
+      <!-- Contraseña Actual -->
+      <label for="currentPassword">Contraseña Actual</label>
+      <div class="input-group mb-3">
+        <input [type]="showCurrentPassword ? 'text' : 'password'" class="form-control" [(ngModel)]="currentPassword" />
+        <div class="input-group-append">
+          <span class="input-group-text" (click)="showCurrentPassword = !showCurrentPassword">
+            <i [ngClass]="showCurrentPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Nueva Contraseña -->
+      <label for="newPassword">Nueva Contraseña</label>
+      <div class="input-group mb-3">
+        <input [type]="showNewPassword ? 'text' : 'password'" class="form-control" [(ngModel)]="newPassword" />
+        <div class="input-group-append">
+          <span class="input-group-text" (click)="showNewPassword = !showNewPassword">
+            <i [ngClass]="showNewPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </span>
+        </div>
+      </div>
+
+      <!-- Confirmar Contraseña -->
+      <label for="confirmPassword">Confirmar Contraseña</label>
+      <div class="input-group mb-3">
+        <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control" [(ngModel)]="confirmPassword" />
+        <div class="input-group-append">
+          <span class="input-group-text" (click)="showConfirmPassword = !showConfirmPassword">
+            <i [ngClass]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </span>
+        </div>
+      </div>
+
+      <button type="button" class="btn-update-password" (click)="changePassword()">ACTUALIZAR CONTRASEÑA</button>
+    </div>
+
+    <!-- Dashboard Power BI -->
+<!-- Dashboard Power BI -->
+<div *ngIf="selectedSection === 'Dashboard'">
+  <p>Visualización de Dashboard en Power BI</p>
+  <p>Explora el informe de datos interactivo para obtener información detallada y visualización completa.</p>
+  <button class="btn-powerbi" (click)="openPowerBIDashboard()">¡Ver Dashboard en Power BI!</button>
+</div>
+  </div>
+</div>

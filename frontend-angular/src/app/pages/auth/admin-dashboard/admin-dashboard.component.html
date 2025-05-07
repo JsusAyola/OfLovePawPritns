@@ -1,0 +1,40 @@
+<div class="admin-panel">
+  <h2>Panel de Administración</h2>
+
+  <!-- Lista de Usuarios -->
+  <div class="section">
+    <h3>Lista de Usuarios</h3>
+    <div class="users-container">
+      <div *ngFor="let user of users" class="user-card">
+        <div class="user-info">
+          <strong>{{ user.firstName }} {{ user.lastName }}</strong>
+          <p></p>
+          <span class="role">{{ user.role }}</span>
+        </div>
+        <button (click)="deleteUser(user._id, user.firstName + ' ' + user.lastName)" class="delete-btn">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de Mascotas Pendientes de Aprobación -->
+  <div class="section">
+    <h3>Lista de Mascotas Pendientes de Aprobación</h3>
+    <div class="pets-container">
+      <div *ngFor="let pet of pets" class="pet-card">
+        <div class="pet-card-header">
+          <img *ngIf="pet.image" [src]="'http://localhost:5000/' + pet.image" alt="Imagen de la mascota" class="pet-card-image" />
+          <div class="pet-info">
+            <h4>{{ pet.name }} - {{ pet.type }}</h4>
+            <p><strong>Estado:</strong> {{ pet.status }}</p>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button (click)="handlePetApproval('aprobar', pet._id)" [disabled]="pet.approvalStatus !== 'pendiente'" class="approve-btn">Aprobar</button>
+          <button (click)="handlePetApproval('rechazar', pet._id)" [disabled]="pet.approvalStatus !== 'pendiente'" class="reject-btn">Rechazar</button>
+          <a [routerLink]="['/pet', pet._id]" class="btn-view-details">Ver Detalles</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

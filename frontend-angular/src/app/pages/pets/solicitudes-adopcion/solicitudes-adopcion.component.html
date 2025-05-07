@@ -1,0 +1,104 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Solicitudes de Adopción - {{ tipoMascota | titlecase }}</h2>
+    <button (click)="irAtras()" class="btn btn-outline-secondary">
+      <i class="fas fa-arrow-left me-1"></i> Volver
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="btn-group mb-4" role="group">
+    <button type="button" 
+            class="btn" 
+            [class.btn-primary]="filtroEstado === 'pendiente'"
+            [class.btn-outline-primary]="filtroEstado !== 'pendiente'"
+            (click)="cambiarFiltro('pendiente')">
+      Pendientes
+    </button>
+    <button type="button" 
+            class="btn" 
+            [class.btn-success]="filtroEstado === 'aprobada'"
+            [class.btn-outline-success]="filtroEstado !== 'aprobada'"
+            (click)="cambiarFiltro('aprobada')">
+      Aprobadas
+    </button>
+    <button type="button" 
+            class="btn" 
+            [class.btn-danger]="filtroEstado === 'rechazada'"
+            [class.btn-outline-danger]="filtroEstado !== 'rechazada'"
+            (click)="cambiarFiltro('rechazada')">
+      Rechazadas
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-2">Cargando solicitudes...</p>
+  </div>
+
+  <!-- Listado -->
+  <div *ngIf="!loading">
+    <div *ngIf="solicitudesFiltradas.length === 0" class="alert alert-info">
+      No hay solicitudes {{filtroEstado === 'pendiente' ? 'pendientes' : filtroEstado === 'aprobada' ? 'aprobadas' : 'rechazadas'}}.
+    </div>
+
+    <div class="row g-4">
+      <div *ngFor="let solicitud of solicitudesFiltradas" class="col-md-6 col-lg-4">
+        <div class="card h-100">
+          <img [src]="'http://localhost:5000/' + solicitud.mascota_id.image" 
+               class="card-img-top" 
+               [alt]="'Imagen de ' + solicitud.mascota_id.name"
+               style="height: 200px; object-fit: cover;">
+          
+          <div class="card-body">
+            <h5 class="card-title">{{ solicitud.mascota_id.name }}</h5>
+            <p class="card-text">
+              <strong>Raza:</strong> {{ solicitud.mascota_id.breed || 'No especificada' }}<br>
+              <strong>Adoptante:</strong> {{ solicitud.adoptador_id.firstName }} {{ solicitud.adoptador_id.lastName }}<br>
+              <strong>Fecha:</strong> {{ solicitud.createdAt | date:'dd/MM/yyyy' }}
+            </p>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="badge" 
+                    [class.bg-warning]="solicitud.estado === 'pendiente'"
+                    [class.bg-success]="solicitud.estado === 'aprobada'"
+                    [class.bg-danger]="solicitud.estado === 'rechazada'">
+                {{ solicitud.estado | uppercase }}
+              </span>
+              
+              <button (click)="verDetallesAdoptador(solicitud.adoptador_id._id)" 
+                      class="btn btn-sm btn-outline-primary">
+                <i class="fas fa-user"></i> Perfil
+              </button>
+            </div>
+
+            <div *ngIf="solicitud.motivo_rechazo" class="alert alert-warning p-2 mb-3">
+              <strong>Motivo rechazo:</strong> {{ solicitud.motivo_rechazo }}
+            </div>
+
+            <div class="d-grid gap-2">
+              <button (click)="verFormulario(solicitud._id, solicitud.adoptador_id._id)" 
+                      class="btn btn-sm btn-info">
+                <i class="fas fa-file-alt"></i> Ver Formulario
+              </button>
+              
+              <div *ngIf="solicitud.estado === 'pendiente'" class="btn-group">
+                <button (click)="aprobarSolicitud(solicitud._id)" 
+                        class="btn btn-sm btn-success">
+                  <i class="fas fa-check"></i> Aprobar
+                </button>
+                <button (click)="rechazarSolicitud(solicitud._id)" 
+                        class="btn btn-sm btn-danger">
+                  <i class="fas fa-times"></i> Rechazar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

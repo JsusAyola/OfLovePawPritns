@@ -1,0 +1,39 @@
+<div class="cats-banner">
+  <div class="banner-content">
+    <h1>GATOS</h1>
+    <p>¡Descubre nuestros adorables felinos listos para encontrar un nuevo hogar!</p>
+  </div>
+</div>
+
+<!-- Contenedor principal para la lista de gatos disponibles -->
+<ng-container *ngFor="let cat of cats">
+  <div *ngIf="cat.status === 'disponible'" class="cat-card">
+    <div class="cat-image-container" [attr.data-name]="cat.name">
+      <img *ngIf="cat.image" [src]="'http://localhost:5000/' + cat.image" alt="{{ cat.name }}" class="cat-image" />
+    </div>
+
+    <div class="cat-card-content">
+      <div class="cat-details">
+        <!-- Parte Izquierda con información principal -->
+        <div class="cat-left">
+          <h3 class="cat-name">{{ cat.name }}</h3>
+          <p class="cat-info"><strong>Raza:</strong> {{ cat.breed }}</p>
+          <p class="cat-info"><strong>Edad:</strong> {{ calculateCatAge(cat.birthDate) }}</p>
+          <p class="cat-info"><strong>Estado:</strong> {{ cat.status }}</p>
+        </div>
+
+        <!-- Parte Derecha con detalles adicionales -->
+        <div class="cat-right">
+          <p class="cat-info"><strong>Peso:</strong> {{ cat.weight }} Kg</p>
+          <p class="cat-info"><strong>Tamaño:</strong> {{ cat.size }}</p>
+        </div>
+      </div>
+
+      <!-- Botones en la parte inferior -->
+      <div class="cat-buttons">
+        <button class="btn-red" (click)="askAboutCat(cat)">PREGUNTAR POR MÍ</button>
+        <p class="interested-count">{{ cat.interestedCount }} personas están interesadas</p>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,25 @@
+<div class="login-wrapper">
+    <div class="login-container card">
+        <img src="/icons/login.avif" alt="Imagen de inicio de sesión" class="login-image">
+        <h2 class="card-title">Iniciar Sesión</h2>
+        <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+            <div class="form-group">
+                <input type="email" [(ngModel)]="email" name="email" class="form-control" placeholder="Correo electrónico" required>
+            </div>
+            <div class="form-group position-relative">
+                <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password" class="form-control" placeholder="Contraseña" required>
+                <span class="toggle-password" (click)="showPassword = !showPassword" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                  <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                </span>
+              </div>
+              
+            <div class="button-group">
+                <button type="submit" class="btn-danger">Ingresar</button>
+                <button type="button" class="btn-create" (click)="navigateToRegister()">Crear Cuenta</button>
+            </div>
+        </form>
+        <p class="forgot-password">
+            <a (click)="navigateToResetPassword()">¿Has olvidado tu contraseña?</a>
+        </p>        
+    </div>
+</div>

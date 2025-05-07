@@ -1,0 +1,100 @@
+<div class="dogs-panel">
+  <h2>🐶 Panel de Perros</h2>
+  <p class="subtitle">Gestiona los perros en adopción y sus solicitudes.</p>
+
+  <!-- Botones de filtro con íconos -->
+  <div class="filter-buttons">
+    <button (click)="filterDogs('all')" [class.active]="selectedFilter === 'all'" class="btn btn-secondary">
+      <i class="fas fa-paw"></i> Todos
+    </button>
+    <button (click)="filterDogs('disponible')" [class.active]="selectedFilter === 'disponible'" class="btn btn-secondary">
+      <i class="fas fa-heart"></i> Disponibles
+    </button>
+    <button (click)="filterDogs('adoptada')" [class.active]="selectedFilter === 'adoptada'" class="btn btn-secondary">
+      <i class="fas fa-home"></i> Adoptados
+    </button>
+    <button (click)="verSolicitudesDeAdopcion()" class="btn btn-requests">
+      <i class="fas fa-file-alt"></i> Solicitudes
+    </button>
+  </div>
+
+  <!-- Lista de perros con efecto "hover" mejorado -->
+  <div class="section">
+    <h3><i class="fas fa-dog"></i> Perros Publicados</h3>
+    <div *ngIf="filteredDogs.length > 0; else noDogs" class="pets-list">
+      <div *ngFor="let dog of filteredDogs" class="pet-card">
+        <div *ngIf="dog.status === 'adoptada'" class="ribbon">🏠 Adoptado</div>
+        <img [src]="'http://localhost:5000/' + dog.image" alt="{{ dog.name }}" class="pet-image" />
+        <div class="pet-info">
+          <h4>{{ dog.name }}</h4>
+          <p><i class="fas fa-paw"></i> <strong>Raza:</strong> {{ dog.breed }}</p>
+          <p><i class="fas fa-info-circle"></i> <strong>Estado:</strong> {{ dog.status }}</p>
+        </div>
+        <div class="pet-actions">
+          <button (click)="editPet(dog)" class="btn btn-edit"><i class="fas fa-edit"></i> Editar</button>
+          <button (click)="deletePet(dog)" class="btn btn-delete"><i class="fas fa-trash"></i> Eliminar</button>
+        </div>
+      </div>
+    </div>
+    <ng-template #noDogs>
+      <p class="no-pets-message">🐾 No hay perros que coincidan con el filtro.</p>
+    </ng-template>
+  </div>
+
+  <!-- Botón Retroceder con estilo mejorado -->
+  <button (click)="volverAtras()" class="btn btn-back">
+    <i class="fas fa-arrow-left"></i> Volver
+  </button>
+
+  <!-- Modal de edición -->
+  <div class="edit-modal" *ngIf="selectedDog" [class.show]="selectedDog">
+    <div class="modal-overlay" (click)="closeEditModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" (click)="closeEditModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h3>✏️ Editar {{ selectedDog.name }}</h3>
+      
+      <form (submit)="updatePet()">
+        <div class="form-group">
+          <label for="name"><i class="fas fa-tag"></i> Nombre:</label>
+          <input type="text" [(ngModel)]="selectedDog.name" name="name" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="breed"><i class="fas fa-paw"></i> Raza:</label>
+          <input type="text" [(ngModel)]="selectedDog.breed" name="breed" required />
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="birthDate"><i class="fas fa-birthday-cake"></i> Fecha de Nacimiento:</label>
+            <input type="date" [(ngModel)]="selectedDog.birthDate" name="birthDate" />
+          </div>
+          
+          <div class="form-group">
+            <label for="sex"><i class="fas fa-venus-mars"></i> Sexo:</label>
+            <select [(ngModel)]="selectedDog.sex" name="sex">
+              <option value="Macho">Macho</option>
+              <option value="Hembra">Hembra</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="vaccines"><i class="fas fa-syringe"></i> Vacunas:</label>
+          <textarea [(ngModel)]="selectedDog.vaccines" name="vaccines" rows="2"></textarea>
+        </div>
+        
+        <div class="modal-actions">
+          <button type="button" class="btn btn-cancel" (click)="closeEditModal()">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+          <button type="submit" class="btn btn-save">
+            <i class="fas fa-save"></i> Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

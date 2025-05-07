@@ -1,0 +1,53 @@
+<!-- ver-formulario-adopcion.component.html -->
+<div *ngIf="loading" class="loading">Cargando formulario...</div>
+
+<div *ngIf="!loading && formulario">
+  <h2>Formulario de Adopción de {{ formulario.adoptador_id.firstName }} {{ formulario.adoptador_id.lastName }}</h2>
+
+  <div>
+    <label for="edad">Edad:</label>
+    <input id="edad" [value]="edad" disabled />
+
+    <label for="ocupacion">Ocupación:</label>
+    <input id="ocupacion" [value]="ocupacion" disabled />
+
+    <label for="experiencia">Experiencia con mascotas:</label>
+    <input id="experiencia" [value]="experiencia" disabled />
+
+    <label for="otraMascota">¿Tiene otra mascota?</label>
+    <input id="otraMascota" [value]="otraMascota" disabled />
+
+    <div *ngIf="otraMascota === 'Sí'">
+      <label for="cantidadMascotas">¿Cuántas mascotas tienes?</label>
+      <input id="cantidadMascotas" [value]="cantidadMascotas" disabled />
+
+      <label for="tipoMascota">¿Qué tipo de mascotas tienes?</label>
+      <input id="tipoMascota" [value]="tipoMascota" disabled />
+    </div>
+
+    <label for="ninosEnCasa">¿Hay niños en casa?</label>
+    <input id="ninosEnCasa" [value]="ninosEnCasa" disabled />
+
+    <label for="tiempoSola">¿Cuánto tiempo pasará la mascota sola en casa?</label>
+    <input id="tiempoSola" [value]="tiempoSola" disabled />
+
+    <label for="veterinario">¿Tiene acceso a un veterinario de confianza?</label>
+    <input id="veterinario" [value]="veterinario" disabled />
+
+    <label for="visitasSeguimiento">¿Está de acuerdo en realizar visitas de seguimiento post-adopción?</label>
+    <input id="visitasSeguimiento" [value]="visitasSeguimiento" disabled />
+
+    <label for="motivo">¿Cuál es tu motivo para adoptar?</label>
+    <input id="motivo" [value]="motivo" disabled />
+
+    <label for="tiempoDisponible">¿Cuánto tiempo al día podrías dedicarle a la mascota?</label>
+    <input id="tiempoDisponible" [value]="tiempoDisponible" disabled />
+
+    <label for="presupuesto">¿Cuánto podrías gastar en la mascota al mes?</label>
+    <input id="presupuesto" [value]="presupuesto" disabled />
+  </div>
+
+ <!-- Botón Cancelar que redirige a la página anterior -->
+ <button (click)="cancelar()">Cancelar</button>
+
+</div>

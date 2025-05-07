@@ -1,0 +1,105 @@
+.text-title-container {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2rem; /* Usar rem para mejor adaptabilidad */
+  text-align: center;
+  min-height: 40vh; /* Altura mínima como porcentaje */
+  display: flex; /* Para centrar el contenido */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
+  flex-direction: column; /* Asegurar apilamiento en móviles */
+}
+
+.text-title-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/icons/numbers/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.text-title-container * {
+  position: relative;
+  z-index: 2;
+}
+
+.text-title-span {
+  color: #808080 !important;
+  font-weight: 700 !important;
+}
+
+.text-title {
+  font-weight: 900 !important;
+}
+
+.text-content-right, .text-content-left {
+  font-weight: 500 !important;
+  margin-bottom: 1.5rem; /* Ajuste a rem */
+  line-height: 1.5;
+}
+
+.instruction-grid {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  flex-wrap: wrap; /* Permite que los elementos se apilen en pantallas pequeñas */
+}
+
+.instruction-column {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px; /* Permite que las columnas crezcan y se ajusten */
+  margin: 0.5rem; /* Espacio entre columnas */
+}
+
+.instruction-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.instruction-step img {
+  margin-right: 1rem; /* Ajuste a rem */
+}
+
+.text-note {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+  .text-title-container {
+    min-height: 30vh; /* Menor altura en dispositivos más pequeños */
+    padding: 1rem; /* Menos padding */
+  }
+
+  .instruction-grid {
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+  }
+
+  .instruction-column {
+    width: 100%; /* Columnas ocupan el 100% del ancho */
+    margin-bottom: 1rem; /* Espacio entre columnas */
+  }
+}
+
+@media (max-width: 480px) {
+  .text-title-span, .text-title {
+    font-size: 1.2rem; /* Ajusta el tamaño de fuente para pantallas muy pequeñas */
+  }
+
+  .text-content-right, .text-content-left {
+    font-size: 1rem; /* Tamaño de fuente más pequeño */
+  }
+}

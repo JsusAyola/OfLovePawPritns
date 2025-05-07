@@ -1,0 +1,29 @@
+<div class="perfil-adoptador">
+  <h2>Información del Usuario</h2>
+
+  <div *ngIf="adoptador; else cargando" class="info-container">
+    <div class="info-item">
+      <strong>Nombre:</strong> <span>{{ adoptador.firstName }}</span>
+    </div>
+    <div class="info-item">
+      <strong>Apellido:</strong> <span>{{ adoptador.lastName }}</span>
+    </div>
+    <div class="info-item">
+      <strong>Correo:</strong> <span>{{ adoptador.email }}</span>
+    </div>
+    <div class="info-item">
+      <strong>Teléfono:</strong> <span>{{ adoptador.phone || 'No proporcionado' }}</span>
+    </div>
+    <div class="info-item">
+      <strong>Edad:</strong> <span>{{ edad !== null ? edad : 'No disponible' }}</span>
+    </div>
+    <div class="info-item">
+      <strong>Fecha de Registro:</strong> <span>{{ adoptador.createdAt | date }}</span>
+    </div>
+    <button (click)="volverAlPanel()" class="btn btn-volver">Volver al Panel</button>
+  </div>
+
+  <ng-template #cargando>
+    <p>Cargando información del usuario...</p>
+  </ng-template>
+</div>

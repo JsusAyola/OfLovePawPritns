@@ -1,0 +1,164 @@
+/* Contenedor principal */
+.container-mi-cuenta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 40px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif; /* Fuente estilizada */
+}
+
+/* Botones de navegación */
+button {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.btn-account {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-account::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.4s ease;
+}
+
+.btn-account:hover::before {
+  left: 100%;
+}
+
+.btn-account-active {
+  background-color: #c82333;
+  color: white;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-account:hover {
+  background-color: #dcdcdc;
+  transform: scale(1.05);
+}
+
+.btn-account-active:hover {
+  background-color: #a71d2a;
+  transform: scale(1.05);
+}
+
+/* Botones de actualización */
+.btn-update-info,
+.btn-update-password {
+  background-color: #c82333;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(200, 35, 51, 0.3);
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-update-info:hover,
+.btn-update-password:hover {
+  background-color: #a71d2a;
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(200, 35, 51, 0.5);
+}
+
+/* Botón de Power BI */
+.btn-powerbi {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+.btn-powerbi:hover {
+  background-color: #ff4d4d;
+  transform: scale(1.08);
+  box-shadow: 0 6px 18px rgba(255, 107, 107, 0.6);
+}
+
+.form-control {
+  margin-bottom: 15px;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #c82333;
+  box-shadow: 0 0 8px rgba(200, 35, 51, 0.4);
+}
+
+/* Estilos responsivos */
+@media (min-width: 768px) {
+  .col-sm-12.col-md-4 {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-mi-cuenta {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .btn-update-info,
+  .btn-update-password,
+  .btn-powerbi {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* Estilos de alertas */
+.alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-radius: 0;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}

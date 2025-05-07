@@ -1,0 +1,121 @@
+/* Contenedor del formulario */
+.form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título */
+  .form-container h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Grupo de campos */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Estilo de los inputs y selects */
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    margin-top: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Input focus */
+  .form-control:focus {
+    border-color: #1976d2;
+    outline: none;
+  }
+  
+  /* Estilo de los mensajes de error */
+  .error {
+    color: #d32f2f;
+    font-size: 0.875rem;
+    margin-top: 0.3rem;
+  }
+  
+  /* Botón de envío */
+  .submit-btn {
+    width: 100%;
+    background-color: #1976d2;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 1.5rem;
+  }
+  
+  .submit-btn:hover {
+    background-color: #1565c0;
+    transform: scale(1.05);
+  }
+  
+  .submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  /* Mensaje de error global */
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Contenedor del resultado */
+  .result-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f7fafc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .result-container h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .result-container p {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .result-container pre {
+    background-color: #fafafa;
+    padding: 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: #333;
+  }
+  
+  /* Estilos para pantallas pequeñas */
+  @media (max-width: 600px) {
+    .form-container {
+      padding: 1.5rem;
+    }
+  
+    .submit-btn {
+      padding: 10px 18px;
+    }
+  }
+  

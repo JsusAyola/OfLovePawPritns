@@ -1,0 +1,241 @@
+<div class="container">
+  <h2>Registrar Nueva Mascota</h2>
+  
+  <form #petForm="ngForm" (ngSubmit)="onSubmit(petForm)">
+    <!-- Nombre -->
+    <label for="name">Nombre:</label>
+<input 
+  type="text" 
+  id="name" 
+  [(ngModel)]="pet.name" 
+  name="name" 
+  required
+  pattern="[A-Za-záéíóúÁÉÍÓÚñÑ\s]+"
+  title="Solo se permiten letras y tildes."
+/>
+
+    <!-- Fecha de nacimiento -->
+    <input 
+    type="date" 
+    id="birthDate" 
+    name="birthDate" 
+    [(ngModel)]="pet.birthDate" 
+    [max]="todayDate" 
+    required 
+    onkeydown="return false;" />
+      
+
+    <!-- Tipo de mascota -->
+    <label for="type">Tipo:</label>
+    <select id="type" [(ngModel)]="pet.type" name="type" (change)="resetRaza()" required>
+      <option value="">Seleccione...</option>
+      <option value="Perro">Perro</option>
+      <option value="Gato">Gato</option>
+    </select>
+
+    <!-- Raza con selección -->
+    <label for="breed">Raza:</label>
+    <input type="text" id="breed" [(ngModel)]="pet.breed" name="breed" readonly required />
+    <button type="button" (click)="abrirSelectorRaza()" [disabled]="!pet.type">Seleccionar Raza</button>
+
+    <!-- Modal de selección de raza -->
+    <div *ngIf="mostrarSelectorRaza" class="modal">
+      <div class="modal-content">
+        <span class="close" (click)="cerrarSelectorRaza()">&times;</span>
+        <h3>Seleccionar Raza</h3>
+    
+        <div *ngFor="let raza of razasFiltradas" (click)="seleccionarRaza(raza)" class="raza-item">
+          <!-- Imagen de la raza -->
+          <img [src]="raza.imagen" alt="{{ raza.nombre }}" class="raza-imagen"/>
+    
+          <!-- Nombre de la raza -->
+          <p><strong>{{ raza.nombre }}</strong></p>
+    
+          <!-- Descripción breve -->
+          <p class="raza-descripcion">{{ raza.descripcionBreve }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sexo -->
+    <label for="sex">Sexo:</label>
+    <select id="sex" [(ngModel)]="pet.sex" name="sex" required>
+      <option value="Macho">Macho</option>
+      <option value="Hembra">Hembra</option>
+    </select>
+
+    <!-- Tamaño -->
+    <label for="size">Tamaño:</label>
+    <select id="size" [(ngModel)]="pet.size" name="size" required>
+      <option value="Pequeño">Pequeño</option>
+      <option value="Mediano">Mediano</option>
+      <option value="Grande">Grande</option>
+    </select>
+
+    <!-- Peso -->
+    <label for="weight">Peso:</label>
+    <select id="weight" [(ngModel)]="pet.weight" name="weight" required>
+      <option value="Menos de 5kg">Menos de 5kg</option>
+      <option value="5-15kg">5-15kg</option>
+      <option value="15-30kg">15-30kg</option>
+      <option value="Más de 30kg">Más de 30kg</option>
+    </select>
+
+<!-- ¿Está vacunado? -->
+<label for="isVaccinated">¿Está vacunado?</label>
+<select id="isVaccinated" [(ngModel)]="pet.isVaccinated" name="isVaccinated" required (change)="onVaccinationChange(pet.isVaccinated)">
+  <option value="Sí">Sí</option>
+  <option value="No">No</option>
+</select>
+
+<!-- Vacunas -->
+<label><strong>Vacunas Aplicadas:</strong></label>
+<input type="text" [(ngModel)]="vacunasSeleccionadasTexto" name="vacunas" [disabled]="pet.isVaccinated === 'No'" readonly />
+<button 
+  type="button" 
+  (click)="abrirSelectorVacunas()" 
+  [disabled]="isVaccinationButtonDisabled"
+  [ngClass]="{'btn-disabled': isVaccinationButtonDisabled}">
+  Seleccionar Vacunas
+</button>
+
+
+
+<div *ngIf="mostrarSelectorVacunas" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="cerrarSelectorVacunas()">&times;</span>
+    <h3>Seleccionar Vacunas</h3>
+
+    <!-- Vacunas para perros -->
+    <div *ngIf="pet.type === 'Perro'">
+      <h4>🐶 Vacunas para perros</h4>
+      <div class="vacunas-container">
+        <div *ngFor="let vacuna of vacunasPerro" (click)="toggleVacuna(vacuna)" class="vacuna-item" [class.selected]="pet.vaccines.includes(vacuna)">
+          <span class="checkmark" *ngIf="pet.vaccines.includes(vacuna)">✔️</span>
+          {{ vacuna }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Vacunas para gatos -->
+    <div *ngIf="pet.type === 'Gato'">
+      <h4>🐱 Vacunas para gatos</h4>
+      <div class="vacunas-container">
+        <div *ngFor="let vacuna of vacunasGato" (click)="toggleVacuna(vacuna)" class="vacuna-item" [class.selected]="pet.vaccines.includes(vacuna)">
+          <span class="checkmark" *ngIf="pet.vaccines.includes(vacuna)">✔️</span>
+          {{ vacuna }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón para guardar selección -->
+    <button type="button" class="guardar-btn" (click)="guardarVacunas()">Guardar</button>
+  </div>
+</div>
+
+<!-- ¿Está esterilizado/castrado? -->
+<label for="sterilized">¿Está esterilizado/castrado?</label>
+<select id="sterilized" [(ngModel)]="pet.sterilized" name="sterilized" required>
+  <option value="true">Sí</option>
+  <option value="false">No</option>
+</select>
+
+    <!-- Nivel de actividad -->
+    <label for="activityLevel">Nivel de Actividad:</label>
+    <select id="activityLevel" [(ngModel)]="pet.activityLevel" name="activityLevel" required>
+      <option value="Bajo">Bajo</option>
+      <option value="Medio">Medio</option>
+      <option value="Alto">Alto</option>
+    </select>
+
+    <!-- Comportamiento ante personas -->
+    <label for="behaviorPeople">Comportamiento ante Personas:</label>
+    <select id="behaviorPeople" [(ngModel)]="pet.behaviorPeople" name="behaviorPeople" required>
+      <option value="Amigable">Amigable</option>
+      <option value="Tímido">Tímido</option>
+      <option value="Agresivo">Agresivo</option>
+      <option value="Territorial">Territorial</option>
+    </select>
+
+    <!-- Comportamiento ante otros animales -->
+    <label for="behaviorAnimals">Comportamiento ante otros Animales:</label>
+    <select id="behaviorAnimals" [(ngModel)]="pet.behaviorAnimals" name="behaviorAnimals" required>
+      <option value="Sociable">Sociable</option>
+      <option value="Tímido">Tímido</option>
+      <option value="Agresivo">Agresivo</option>
+      <option value="Territorial">Territorial</option>
+    </select>
+
+    <!-- Imagen -->
+    <label for="image">Foto de la Mascota:</label>
+    <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" />
+
+
+    <!-- Nuevos campos -->
+  <div>
+    <label for="medicalConditions">Condiciones médicas:</label>
+    <select id="medicalConditions" [(ngModel)]="pet.medicalConditions" name="medicalConditions" required>
+      <option value="Ninguna">Ninguna</option>
+      <option value="Enfermedades crónicas">Enfermedades crónicas</option>
+      <option value="Lesiones previas">Lesiones previas</option>
+      <option value="Afecciones respiratorias">Afecciones respiratorias</option>
+      <option value="Otro">Otro</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="allergies">Alergias:</label>
+    <select id="allergies" [(ngModel)]="pet.allergies" name="allergies" required>
+      <option value="Ninguna">Ninguna</option>
+      <option value="Alimentos">Alimentos</option>
+      <option value="Polvo/Ácaros">Polvo/Ácaros</option>
+      <option value="Polen">Polen</option>
+      <option value="Medicamentos">Medicamentos</option>
+      <option value="Otro">Otro</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="location">Ubicación:</label>
+    <input type="text" id="location" [(ngModel)]="pet.location" name="location" required readonly>
+    <button type="button" (click)="obtenerUbicacion()">Obtener Ubicación</button>
+  </div>
+
+  <div>
+    <label for="verificationImage"><strong>Foto de comprobación visual:</strong></label>
+    <input
+      type="file"
+      id="verificationImage"
+      (change)="onVerificationImageSelected($event)"
+      name="verificationImage"
+      required
+    />
+    <small>Sube una foto donde la mascota aparezca con un objeto específico (ejemplo: una hoja con la fecha del día).</small>
+  </div>
+  
+  <!-- Checkbox alineado correctamente -->
+  <div class="confirm-container">
+    <input
+      type="checkbox"
+      id="ownershipConfirmation"
+      [(ngModel)]="pet.ownershipConfirmation"
+      name="ownershipConfirmation"
+    />
+    <label for="ownershipConfirmation">
+      <strong>Confirmo que tengo esta mascota en mi posesión y que está en condiciones de adopción.</strong>
+    </label>
+  </div>
+  
+<!-- Botón Volver atrás -->
+<div class="action-buttons">
+  <button type="button" (click)="goBack()" class="btn btn-back">Volver Atrás</button>
+
+  
+  <!-- 🚀 Botón cambia de color dinámicamente -->
+  <button type="submit"
+    [disabled]="!pet.ownershipConfirmation"
+    [ngClass]="{'disabled-btn': !pet.ownershipConfirmation, 'enabled-btn': pet.ownershipConfirmation}">
+    Registrar Mascota
+  </button>
+</div>
+</form>

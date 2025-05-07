@@ -1,0 +1,24 @@
+<div class="adoptadas-container">
+  <h1>Mascotas Adoptadas</h1>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  <div *ngIf="mascotasAdoptadas.length === 0 && !errorMessage" class="no-mascotas">
+    No tienes mascotas adoptadas registradas.
+  </div>
+
+  <div *ngIf="mascotasAdoptadas.length > 0" class="mascotas-grid">
+    <div *ngFor="let mascota of mascotasAdoptadas" class="mascota-card">
+      <div class="card-header">
+        <div class="imagen-container">
+          <img [src]="mascota.imagen" alt="Imagen de {{ mascota.nombre }}">
+        </div>
+        <h2>{{ mascota.nombre }}</h2>
+        <i class="fa fa-heart"></i>
+      </div>
+      <div class="mascota-info">
+        <p><strong>Tipo de Mascota:</strong> {{ mascota.tipo }}</p>
+        <p><strong>Fecha de Adopción:</strong> {{ mascota.fechaAdopcion }}</p>
+        <p><strong>Raza:</strong> {{ mascota.raza || 'Raza no especificada' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

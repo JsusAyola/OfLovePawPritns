@@ -1,0 +1,236 @@
+/* Contenedor principal */
+.solicitudes-panel-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Título del panel */
+.solicitudes-panel-title {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Botones de filtro */
+.filtro-estado {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filtro-estado button {
+  background: #757575;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.filtro-estado button.active,
+.filtro-estado button:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+/* Grid para la lista de solicitudes */
+.solicitudes-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Tarjeta de cada solicitud */
+.solicitud-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.solicitud-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen de la mascota */
+.solicitud-card img {
+  width: 100%;
+  max-width: 250px;
+  height: 200px; /* Ajusta esta altura según tu diseño */
+  object-fit: cover; /* Esto recorta las imágenes para llenar el área especificada */
+  border-radius: 12px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.solicitud-card img:hover {
+  transform: scale(1.05);
+}
+
+/* Información de la solicitud */
+.solicitud-info {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.solicitud-info p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.solicitud-info .label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilos para el estado con icono */
+.estado-aprobada {
+  color: #4caf50;
+}
+
+.estado-rechazada {
+  color: #f44336;
+}
+
+.estado-en-proceso {
+  color: #ff9800;
+}
+
+.solicitud-info .estado-aprobada::before {
+  content: '✅ '; /* Icono para estado aprobado */
+}
+
+.solicitud-info .estado-rechazada::before {
+  content: '❌ '; /* Icono para estado rechazado */
+}
+
+.solicitud-info .estado-en-proceso::before {
+  content: '⏳ '; /* Icono para estado en proceso */
+}
+
+/* Botones de acción */
+.solicitud-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.solicitud-actions button {
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+/* Colores y efectos para botones */
+.btn-perfil {
+  background-color: #00bcd4;
+}
+
+.btn-perfil:hover {
+  background-color: #0097a7;
+  transform: scale(1.05);
+}
+
+.btn-formulario {
+  background-color: #757575;
+}
+
+.btn-formulario:hover {
+  background-color: #5e5e5e;
+  transform: scale(1.05);
+}
+
+.btn-aprobar {
+  background-color: #4caf50;
+}
+
+.btn-aprobar:hover {
+  background-color: #388e3c;
+  transform: scale(1.05);
+}
+
+.btn-rechazar {
+  background-color: #f44336;
+}
+
+.btn-rechazar:hover {
+  background-color: #d32f2f;
+  transform: scale(1.05);
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 600px) {
+  .solicitud-actions {
+    flex-direction: column;
+  }
+}
+
+.btn-atras {
+  background-color: #f44336; /* Color rojo */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-atras:hover {
+  background-color: #d32f2f;
+}
+
+
+.card {
+  transition: transform 0.2s;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img-top {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.badge {
+  font-size: 0.8em;
+  padding: 0.5em 0.75em;
+}
+
+.btn-group {
+  box-shadow: none;
+}
+
+.alert-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}

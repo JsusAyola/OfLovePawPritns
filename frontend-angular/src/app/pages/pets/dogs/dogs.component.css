@@ -1,0 +1,231 @@
+/* Estilos generales para la tarjeta de perros */
+.dog-card {
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: row;
+    max-width: 1110px;
+    width: 100%;
+    height: 246.26px;
+    position: relative;
+}
+
+.dog-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor de la imagen del perro */
+.dog-image-container {
+    flex: 0 0 276.5px;
+    height: 246.26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 15px 0 0 15px;
+    border: 2px solid #d32f2f;
+    position: relative;
+}
+
+/* Imagen del perro */
+.dog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+/* Mostrar el nombre centrado sobre la imagen */
+.dog-image-container::before {
+    content: attr(data-name);
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(211, 47, 47, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 90%;
+}
+
+/* Contenido dentro de la tarjeta */
+.dog-card-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 20px;
+}
+
+/* Información del perro en la parte izquierda */
+.dog-details-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Información adicional en la parte derecha */
+.dog-details-right {
+    flex: 1;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dog-info {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Estilo para el nombre */
+.dog-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #d32f2f;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Botón de preguntar */
+.btn-red {
+    background-color: #d32f2f;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.btn-red:hover {
+    background-color: #b71c1c;
+    transform: translateY(-3px);
+}
+
+/* Contador de interesados */
+.interested-count {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .dog-card {
+        flex-direction: column;
+        width: 95%;
+        padding: 20px;
+        height: auto;
+    }
+
+    .dog-image-container {
+        width: 100%;
+        height: 180px;
+    }
+
+    .dog-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .dog-card-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .dog-details-left,
+    .dog-details-right {
+        width: 100%;
+        padding: 0;
+        text-align: left;
+        margin-top: 10px;
+    }
+
+    .btn-red {
+        width: 80%;
+        margin-top: 10px;
+    }
+
+    .dog-name {
+        font-size: 20px;
+    }
+}
+
+/* Banner de perros */
+.dogs-banner {
+    background-image: url('/icons/guau5.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.dogs-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+}
+
+.banner-content h1 {
+    font-size: 64px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin: 0;
+    color: #FFD700;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.banner-content p {
+    font-size: 22px;
+    margin-top: 10px;
+    color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Animaciones */
+.dog-card:hover .dog-details {
+    animation: shake 0.2s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}

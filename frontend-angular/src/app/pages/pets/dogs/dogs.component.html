@@ -1,0 +1,40 @@
+<!-- Banner para Perros -->
+<div class="dogs-banner">
+    <div class="banner-content">
+        <h1>PERROS</h1>
+        <p>¡Encuentra tu amigo canino ideal para un nuevo hogar!</p>
+    </div>
+</div>
+
+<!-- Contenedor principal para la lista de perros disponibles -->
+<ng-container *ngFor="let dog of dogs">
+    <div *ngIf="dog.status === 'disponible'" class="dog-card">
+        <div class="dog-image-container" [attr.data-name]="dog.name">
+            <img *ngIf="dog.image" [src]="'http://localhost:5000/' + dog.image" alt="{{ dog.name }}" class="dog-image" />
+        </div>
+
+        <div class="dog-card-content">
+            <div class="dog-details">
+                <!-- Parte Izquierda con información principal -->
+                <div class="dog-left">
+                    <h3 class="dog-name">{{ dog.name }}</h3>
+                    <p class="dog-info"><strong>Raza:</strong> {{ dog.breed }}</p>
+                    <p class="dog-info"><strong>Edad:</strong> {{ calculateDogAge(dog.birthDate) }}</p>
+                    <p class="dog-info"><strong>Estado:</strong> {{ dog.status }}</p>
+                </div>
+
+                <!-- Parte Derecha con detalles adicionales -->
+                <div class="dog-right">
+                    <p class="dog-info"><strong>Peso:</strong> {{ dog.weight }} Kg</p>
+                    <p class="dog-info"><strong>Tamaño:</strong> {{ dog.size }}</p>
+                </div>
+            </div>
+
+            <!-- Botones en la parte inferior -->
+            <div class="dog-buttons">
+                <button class="btn-red" (click)="askAboutDog(dog)">PREGUNTAR POR MÍ</button>
+                <p class="interested-count">{{ dog.interestedCount }} personas están interesadas</p>
+            </div>
+        </div>
+    </div>
+</ng-container>

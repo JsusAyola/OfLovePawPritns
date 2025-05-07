@@ -1,0 +1,80 @@
+.information-container {
+    width: 90%; /* Ancho responsivo para móviles */
+    max-width: 1140px; /* Ancho máximo del contenedor */
+    height: auto; /* Altura automática para contenido */
+    margin: 20px auto; /* Espacio arriba y abajo, centrado horizontalmente */
+    padding: 20px; /* Espaciado interno para el contenido */
+    border-radius: 5px; /* Esquinas redondeadas */
+    border: 2px solid rgba(0, 0, 0, 0.2); /* Borde gris claro */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra opcional */
+    background-color: white; /* Fondo blanco */
+    display: flex; /* Usar flexbox */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+}
+
+.information-image {
+    width: 100%; /* Ancho completo */
+    height: 276.25px; /* Mantener la altura específica de la imagen */
+    object-fit: cover; /* Ajustar imagen sin distorsionar */
+    margin: 0; /* Eliminar espacio debajo de la imagen */
+}
+
+.information-title {
+    font-size: 28px; /* Tamaño del texto del título */
+    color: red; /* Color del texto en rojo */
+    text-align: center; /* Centra el título */
+    margin: 20px 0; /* Espacio entre la imagen y el texto */
+}
+
+.information-container p {
+    text-align: justify; /* Justificar el texto */
+    margin: 0 0 20px 0; /* Espacio debajo del texto */
+}
+
+/* Media Queries para adaptaciones en diferentes pantallas */
+@media (max-width: 768px) {
+    .information-title {
+        font-size: 24px; /* Tamaño más pequeño en móviles */
+    }
+
+    .information-container {
+        padding: 15px; /* Espaciado interno ajustado para pantallas más pequeñas */
+    }
+
+    .information-image {
+        height: 276.25px; /* Mantener la altura específica de la imagen */
+    }
+}
+
+@media (max-width: 480px) {
+    .information-title {
+        font-size: 20px; /* Tamaño aún más pequeño en pantallas muy pequeñas */
+    }
+
+    .information-container {
+        padding: 10px; /* Espaciado interno reducido */
+    }
+
+    .information-image {
+        height: 276.25px; /* Mantener la altura específica de la imagen */
+    }
+}
+
+
+.btn-accept {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Esquinas redondeadas */
+    padding: 10px 20px; /* Espaciado interno un poco más grande */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 20px 0; /* Espacio arriba y abajo del botón */
+    font-size: 16px; /* Tamaño del texto */
+    width: 100%; /* Ancho completo */
+    max-width: 200px; /* Ancho máximo ajustado */
+}
+
+.btn-accept:hover {
+    background-color: #c82333; /* Color al pasar el mouse */
+}

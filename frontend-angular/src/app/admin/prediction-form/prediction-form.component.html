@@ -1,0 +1,198 @@
+<div class="form-container">
+  <h2>Formulario de Predicción</h2>
+
+  <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
+
+    <!-- Tipo de mascota -->
+    <div class="form-group">
+      <label for="type">Tipo de mascota:</label>
+      <select id="type" formControlName="type" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Gato">Gato</option>
+        <option value="Perro">Perro</option>
+      </select>
+    </div>
+
+    <!-- Raza -->
+    <div class="form-group">
+      <label for="breed">Raza:</label>
+      <select id="breed" formControlName="breed" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Labrador">Labrador</option>
+        <option value="Bulldog">Bulldog</option>
+        <option value="Persa">Persa</option>
+        <option value="Husky">Husky</option>
+        <option value="Siames">Siames</option>
+        <option value="Mestizo">Mestizo</option>
+      </select>
+    </div>
+
+    <!-- Sexo -->
+    <div class="form-group">
+      <label for="sex">Sexo:</label>
+      <select id="sex" formControlName="sex" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Hembra">Hembra</option>
+        <option value="Macho">Macho</option>
+      </select>
+    </div>
+
+    <!-- Tamaño -->
+    <div class="form-group">
+      <label for="size">Tamaño:</label>
+      <select id="size" formControlName="size" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Mediano">Mediano</option>
+        <option value="Pequeno">Pequeño</option>
+        <option value="Grande">Grande</option>
+      </select>
+    </div>
+
+    <!-- Peso -->
+    <div class="form-group">
+      <label for="weight">Peso:</label>
+      <select id="weight" formControlName="weight" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Mas de 30kg">Más de 30kg</option>
+        <option value="5-15kg">5-15kg</option>
+        <option value="15-30kg">15-30kg</option>
+        <option value="Menos de 5kg">Menos de 5kg</option>
+      </select>
+    </div>
+
+    <!-- Vacunas -->
+    <div class="form-group">
+      <label for="vaccines">Vacunas:</label>
+      <select id="vaccines" formControlName="vaccines" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Rabia">Rabia</option>
+        <option value="Parvovirus">Parvovirus</option>
+        <option value="Leptospirosis">Leptospirosis</option>
+        <option value="Hepatitis Infecciosa Canina">Hepatitis Infecciosa Canina</option>
+        <option value="Moquillo">Moquillo</option>
+      </select>
+    </div>
+
+    <!-- Esterilizado -->
+    <div class="form-group">
+      <label for="sterilized">Esterilizado:</label>
+      <select id="sterilized" formControlName="sterilized" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Si">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <!-- Nivel de Actividad -->
+    <div class="form-group">
+      <label for="activityLevel">Nivel de Actividad:</label>
+      <select id="activityLevel" formControlName="activityLevel" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Alto">Alto</option>
+        <option value="Bajo">Bajo</option>
+        <option value="Medio">Medio</option>
+      </select>
+    </div>
+
+    <!-- Comportamiento con personas -->
+    <div class="form-group">
+      <label for="behaviorPeople">Comportamiento con Personas:</label>
+      <select id="behaviorPeople" formControlName="behaviorPeople" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Timido">Tímido</option>
+        <option value="Agresivo">Agresivo</option>
+        <option value="Amigable">Amigable</option>
+        <option value="Territorial">Territorial</option>
+      </select>
+    </div>
+
+    <!-- Comportamiento con animales -->
+    <div class="form-group">
+      <label for="behaviorAnimals">Comportamiento con Animales:</label>
+      <select id="behaviorAnimals" formControlName="behaviorAnimals" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Territorial">Territorial</option>
+        <option value="Agresivo">Agresivo</option>
+        <option value="Sociable">Sociable</option>
+        <option value="Timido">Tímido</option>
+      </select>
+    </div>
+
+    <!-- Estado de Aprobación -->
+    <div class="form-group">
+      <label for="approvalStatus">Estado de Aprobación:</label>
+      <select id="approvalStatus" formControlName="approvalStatus" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="aprobada">Aprobada</option>
+        <option value="pendiente">Pendiente</option>
+        <option value="rechazada">Rechazada</option>
+      </select>
+    </div>
+
+    <!-- Estado -->
+    <div class="form-group">
+      <label for="status">Estado:</label>
+      <select id="status" formControlName="status" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="disponible">Disponible</option>
+        <option value="adoptado">Adoptado</option>
+        <option value="fallecido">Fallecido</option>
+      </select>
+    </div>
+
+    <!-- Condiciones Médicas -->
+    <div class="form-group">
+      <label for="medicalConditions">Condiciones Médicas:</label>
+      <select id="medicalConditions" formControlName="medicalConditions" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Ninguna">Ninguna</option>
+        <option value="Afecciones respiratorias">Afecciones respiratorias</option>
+        <option value="Lesiones previas">Lesiones previas</option>
+        <option value="Enfermedades cronicas">Enfermedades crónicas</option>
+      </select>
+    </div>
+
+    <!-- Alergias -->
+    <div class="form-group">
+      <label for="allergies">Alergias:</label>
+      <select id="allergies" formControlName="allergies" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Ninguna">Ninguna</option>
+        <option value="Medicamentos">Medicamentos</option>
+        <option value="Polen">Polen</option>
+        <option value="Polvo">Polvo</option>
+        <option value="Alimentos">Alimentos</option>
+      </select>
+    </div>
+
+    <!-- Confirmación de Propiedad -->
+    <div class="form-group">
+      <label for="ownershipConfirmation">Confirmación de Propiedad:</label>
+      <select id="ownershipConfirmation" formControlName="ownershipConfirmation" class="form-control">
+        <option value="">Seleccione...</option>
+        <option value="Si">Sí</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <!-- Botón de envío -->
+    <button type="submit" class="submit-btn" [disabled]="predictionForm.invalid || isLoading">
+      {{ isLoading ? 'Procesando...' : 'Predecir' }}
+    </button>
+
+    <!-- Error -->
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+  </form>
+
+  <!-- Resultado de la predicción -->
+  <div *ngIf="predictionResult" class="result-container">
+    <h3>Resultado:</h3>
+    <p>{{ predictionResult.message }}</p>
+  </div>
+</div>
+
+
+  

@@ -1,0 +1,341 @@
+/* Estilos generales */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 25px;
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+form:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos del título */
+h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+  color: #333;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+/* Etiquetas de los campos */
+label {
+  font-weight: bold;
+  margin-top: 12px;
+  display: block;
+  color: #555;
+  font-size: 16px;
+}
+
+/* Campos de entrada */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0 12px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease-in-out;
+  background: #f9f9f9;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.5);
+  outline: none;
+}
+
+/* Botón "Seleccionar Raza" */
+button[type="button"] {
+  background: #007bff;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+button[type="button"]:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Botón de envío */
+button[type="submit"] {
+  background: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+button[type="submit"]:hover {
+  background: #388E3C;
+  transform: scale(1.05);
+}
+
+/* Estilos para la subida de imágenes */
+input[type="file"] {
+  padding: 8px;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+/* Estilos de checkbox */
+input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+/* Estilos para checkbox en fila */
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.checkbox-group label {
+  margin-right: 15px;
+  font-size: 14px;
+}
+
+/* Mensajes de éxito y error */
+.success-message {
+  color: #2E7D32;
+  font-weight: bold;
+  background: #E8F5E9;
+  padding: 12px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.error-message {
+  color: #C62828;
+  font-weight: bold;
+  background: #FFEBEE;
+  padding: 12px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Estilos del modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.modal img:hover {
+  transform: scale(1.05);
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #444;
+}
+
+.close:hover {
+  color: #D32F2F;
+}
+
+.modal {
+  display: block !important;
+}
+
+.modal-close {
+  font-size: 22px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+/* Estilos específicos para el modal de vacunas */
+.vacunas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.vacuna-item {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s, border-color 0.3s;
+  background-color: #f9f9f9;
+}
+
+.vacuna-item:hover {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+}
+
+.vacuna-item.selected {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+}
+
+.checkmark {
+  margin-right: 10px;
+  color: #2196f3;
+  font-size: 16px;
+}
+
+/* Botón de guardar en el modal */
+.guardar-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.guardar-btn:hover {
+  background-color: #1976d2;
+}
+
+
+
+/* Estilo para el botón deshabilitado */
+.btn-disabled {
+  background-color: #d3d3d3 !important; /* Gris claro */
+  cursor: not-allowed !important; /* Cambia el cursor para mostrar que está deshabilitado */
+  border: 1px solid #ccc !important; /* Opcional: color de borde gris */
+}
+
+.confirm-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.confirm-container input {
+  width: 20px;
+  height: 20px;
+}
+
+.confirm-container label {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.disabled-btn {
+  background-color: gray !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.enabled-btn {
+  background-color: green !important;
+  cursor: pointer;
+  opacity: 1;
+  transition: background-color 0.3s ease-in-out;
+}
+/* Estilo para los botones de acción */
+.action-buttons {
+  display: flex;
+  justify-content: space-between; /* Espacia los botones de manera que estén alineados */
+  margin-top: 20px;
+}
+
+.btn-back {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 48%; /* Hace que el botón ocupe la mitad del espacio disponible */
+}
+
+.btn-back:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para el botón "Registrar Mascota" */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  width: 48%; /* Hace que el botón ocupe la mitad del espacio disponible */
+}
+
+button[type="submit"]:hover {
+  background-color: #388E3C;
+}
+
+/* Estilo para los botones deshabilitados */
+.disabled-btn {
+  background-color: #d3d3d3 !important;
+  cursor: not-allowed;
+  opacity: 0.5;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Estilo para los botones habilitados */
+.enabled-btn {
+  background-color: #4CAF50 !important;
+  opacity: 1;
+  transition: background-color 0.3s ease-in-out;
+}

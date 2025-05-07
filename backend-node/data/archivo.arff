@@ -1,0 +1,20 @@
+@relation pets_sinteticas_balanceado
+
+@attribute Tipo {Gato,Perro}
+@attribute Raza {Labrador,Bulldog,Persa,Husky,Siames,Mestizo}
+@attribute Sexo {Hembra,Macho}
+@attribute Tamano {Mediano,Pequeno,Grande}
+@attribute Peso {'Mas de 30kg',5-15kg,15-30kg,'Menos de 5kg'}
+@attribute Vacunas {Rabia,Parvovirus,Leptospirosis,'Hepatitis Infecciosa Canina',Moquillo}
+@attribute Esterilizado {Si,No}
+@attribute Nivel_Actividad {Alto,Bajo,Medio}
+@attribute Comportamiento_Personas {Timido,Agresivo,Amigable,Territorial}
+@attribute Comportamiento_Animales {Territorial,Agresivo,Sociable,Timido}
+@attribute Estado_Aprobacion {aprobada,pendiente,rechazada}
+@attribute Estado {disponible,adoptado,fallecido}
+@attribute Condiciones_Medicas {Ninguna,'Afecciones respiratorias','Lesiones previas','Enfermedades cronicas'}
+@attribute Alergias {Ninguna,Medicamentos,Polen,Polvo,Alimentos}
+@attribute Confirmacion_Propiedad {Si,No}
+@attribute Adoptado {Si,No}
+
+@data

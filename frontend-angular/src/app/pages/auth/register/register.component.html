@@ -1,0 +1,60 @@
+<div class="register-container">
+  <img src="/icons/tristep.jpg" alt="Registration image" class="register-image">
+  <h1>Registro de Usuario</h1>
+  
+  <!-- Formulario de registro -->
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+    
+    <!-- Nombre completo -->
+    <div class="input-container">
+      <input id="firstName" name="firstName" type="text" placeholder="Nombre" [(ngModel)]="firstName" required
+             [ngClass]="{'input-error': registerForm.controls['firstName'] && registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched}" />
+    </div>
+    
+    <div class="input-container">
+      <input id="lastName" name="lastName" type="text" placeholder="Apellido" [(ngModel)]="lastName" required
+             [ngClass]="{'input-error': registerForm.controls['lastName'] && registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched}" />
+    </div>
+
+    <!-- Correo -->
+    <div class="input-container">
+      <input id="email" name="email" type="email" placeholder="Correo electrónico" [(ngModel)]="email" required
+             [ngClass]="{'input-error': registerForm.controls['email'] && registerForm.controls['email'].invalid && registerForm.controls['email'].touched}" />
+    </div>
+
+    <!-- Contraseña -->
+    <div class="input-container position-relative">
+      <input id="password" name="password" [type]="showPassword ? 'text' : 'password'" placeholder="Contraseña" [(ngModel)]="password" required
+             [ngClass]="{'input-error': registerForm.controls['password'] && registerForm.controls['password'].invalid && registerForm.controls['password'].touched}" />
+      <span class="toggle-password" (click)="showPassword = !showPassword">
+        <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+      </span>
+    </div>
+
+    <!-- Fecha de nacimiento -->
+    <div class="input-container">
+      <label for="birthDate">Fecha de Nacimiento</label>
+      <input id="birthDate" name="birthDate" type="date" [(ngModel)]="birthDate" required [min]="minDate" [max]="maxDate"
+             [ngClass]="{'input-error': registerForm.controls['birthDate'] && registerForm.controls['birthDate'].invalid && registerForm.controls['birthDate'].touched}" />
+    </div>
+
+    <!-- Rol -->
+    <div class="input-container">
+      <select id="role" name="role" [(ngModel)]="role" required
+              [ngClass]="{'input-error': registerForm.controls['role'] && registerForm.controls['role'].invalid && registerForm.controls['role'].touched}">
+        <option value="" disabled selected>Selecciona un rol</option>
+        <option value="cuidador">Cuidador</option>
+        <option value="adoptador">Adoptador</option>
+      </select>
+    </div>
+
+    <!-- Teléfono (solo visible si el rol es Cuidador) -->
+    <div class="input-container" *ngIf="role === 'cuidador'">
+      <input id="phone" name="phone" type="text" placeholder="Número de teléfono (obligatorio para cuidador)" [(ngModel)]="phone"
+             [ngClass]="{'input-error': registerForm.controls['phone'] && registerForm.controls['phone'].invalid && registerForm.controls['phone'].touched}" />
+    </div>
+
+    <!-- Botón de submit -->
+    <button type="submit" class="btn-accept">Registrarse</button>
+  </form>
+</div>
