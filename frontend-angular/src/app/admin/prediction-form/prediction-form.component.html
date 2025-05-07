@@ -1,168 +1,131 @@
 <div class="form-container">
-  <h2>Prediction Form</h2>
+  <h2>Formulario de Predicción</h2>
 
   <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
 
     <!-- Tipo de mascota -->
     <mat-form-field appearance="fill">
-      <mat-label>Pet Type</mat-label>
+      <mat-label>Tipo de mascota</mat-label>
       <mat-select formControlName="type">
-        <mat-option value="Dog">Dog</mat-option>
-        <mat-option value="Cat">Cat</mat-option>
+        <mat-option *ngFor="let type of animalTypes" [value]="type">{{ type }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Raza -->
     <mat-form-field appearance="fill">
-      <mat-label>Breed</mat-label>
+      <mat-label>Raza</mat-label>
       <mat-select formControlName="breed">
-        <mat-option value="Labrador">Labrador</mat-option>
-        <mat-option value="Bulldog">Bulldog</mat-option>
-        <mat-option value="Persian">Persian</mat-option>
-        <mat-option value="Husky">Husky</mat-option>
-        <mat-option value="Siamese">Siamese</mat-option>
-        <mat-option value="Mixed">Mixed</mat-option>
+        <mat-option *ngFor="let breed of breeds" [value]="breed">{{ breed }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Sexo -->
     <mat-form-field appearance="fill">
-      <mat-label>Sex</mat-label>
+      <mat-label>Sexo</mat-label>
       <mat-select formControlName="sex">
-        <mat-option value="Female">Female</mat-option>
-        <mat-option value="Male">Male</mat-option>
+        <mat-option *ngFor="let sex of sexes" [value]="sex">{{ sex }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Tamaño -->
     <mat-form-field appearance="fill">
-      <mat-label>Size</mat-label>
+      <mat-label>Tamaño</mat-label>
       <mat-select formControlName="size">
-        <mat-option value="Small">Small</mat-option>
-        <mat-option value="Medium">Medium</mat-option>
-        <mat-option value="Large">Large</mat-option>
+        <mat-option *ngFor="let size of sizes" [value]="size">{{ size }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Peso -->
     <mat-form-field appearance="fill">
-      <mat-label>Weight</mat-label>
+      <mat-label>Peso</mat-label>
       <mat-select formControlName="weight">
-        <mat-option value="Under 5kg">Under 5kg</mat-option>
-        <mat-option value="5-15kg">5-15kg</mat-option>
-        <mat-option value="15-30kg">15-30kg</mat-option>
-        <mat-option value="Over 30kg">Over 30kg</mat-option>
+        <mat-option *ngFor="let weight of weights" [value]="weight">{{ weight }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Vacunas -->
     <mat-form-field appearance="fill">
-      <mat-label>Vaccines</mat-label>
+      <mat-label>Vacunas</mat-label>
       <mat-select formControlName="vaccines">
-        <mat-option value="Rabies">Rabies</mat-option>
-        <mat-option value="Parvovirus">Parvovirus</mat-option>
-        <mat-option value="Leptospirosis">Leptospirosis</mat-option>
-        <mat-option value="Canine Hepatitis">Canine Hepatitis</mat-option>
-        <mat-option value="Distemper">Distemper</mat-option>
+        <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine">{{ vaccine }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Esterilizado -->
     <mat-form-field appearance="fill">
-      <mat-label>Sterilized</mat-label>
+      <mat-label>Esterilizado</mat-label>
       <mat-select formControlName="sterilized">
-        <mat-option value="Yes">Yes</mat-option>
-        <mat-option value="No">No</mat-option>
+        <mat-option *ngFor="let option of yesNoOptions" [value]="option">{{ option }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Nivel de Actividad -->
     <mat-form-field appearance="fill">
-      <mat-label>Activity Level</mat-label>
+      <mat-label>Nivel de Actividad</mat-label>
       <mat-select formControlName="activityLevel">
-        <mat-option value="High">High</mat-option>
-        <mat-option value="Medium">Medium</mat-option>
-        <mat-option value="Low">Low</mat-option>
+        <mat-option *ngFor="let level of activityLevels" [value]="level">{{ level }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Comportamiento con Personas -->
     <mat-form-field appearance="fill">
-      <mat-label>Behavior with People</mat-label>
+      <mat-label>Comportamiento con Personas</mat-label>
       <mat-select formControlName="behaviorPeople">
-        <mat-option value="Friendly">Friendly</mat-option>
-        <mat-option value="Aggressive">Aggressive</mat-option>
-        <mat-option value="Shy">Shy</mat-option>
-        <mat-option value="Territorial">Territorial</mat-option>
+        <mat-option *ngFor="let behavior of behaviors" [value]="behavior">{{ behavior }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Comportamiento con Animales -->
     <mat-form-field appearance="fill">
-      <mat-label>Behavior with Animals</mat-label>
+      <mat-label>Comportamiento con Animales</mat-label>
       <mat-select formControlName="behaviorAnimals">
-        <mat-option value="Sociable">Sociable</mat-option>
-        <mat-option value="Aggressive">Aggressive</mat-option>
-        <mat-option value="Shy">Shy</mat-option>
-        <mat-option value="Territorial">Territorial</mat-option>
+        <mat-option *ngFor="let behavior of behaviors" [value]="behavior">{{ behavior }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Estado de Aprobación -->
     <mat-form-field appearance="fill">
-      <mat-label>Approval Status</mat-label>
+      <mat-label>Estado de Aprobación</mat-label>
       <mat-select formControlName="approvalStatus">
-        <mat-option value="Approved">Approved</mat-option>
-        <mat-option value="Pending">Pending</mat-option>
-        <mat-option value="Rejected">Rejected</mat-option>
+        <mat-option *ngFor="let status of ['aprobada', 'pendiente', 'rechazada']" [value]="status">{{ status }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Estado -->
     <mat-form-field appearance="fill">
-      <mat-label>Status</mat-label>
+      <mat-label>Estado</mat-label>
       <mat-select formControlName="status">
-        <mat-option value="Available">Available</mat-option>
-        <mat-option value="Adopted">Adopted</mat-option>
-        <mat-option value="Deceased">Deceased</mat-option>
+        <mat-option *ngFor="let status of ['disponible', 'adoptado', 'fallecido']" [value]="status">{{ status }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Condiciones Médicas -->
     <mat-form-field appearance="fill">
-      <mat-label>Medical Conditions</mat-label>
+      <mat-label>Condiciones Médicas</mat-label>
       <mat-select formControlName="medicalConditions">
-        <mat-option value="None">None</mat-option>
-        <mat-option value="Respiratory Issues">Respiratory Issues</mat-option>
-        <mat-option value="Previous Injuries">Previous Injuries</mat-option>
-        <mat-option value="Chronic Diseases">Chronic Diseases</mat-option>
+        <mat-option *ngFor="let condition of medicalConditions" [value]="condition">{{ condition }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Alergias -->
     <mat-form-field appearance="fill">
-      <mat-label>Allergies</mat-label>
+      <mat-label>Alergias</mat-label>
       <mat-select formControlName="allergies">
-        <mat-option value="None">None</mat-option>
-        <mat-option value="Medications">Medications</mat-option>
-        <mat-option value="Pollen">Pollen</mat-option>
-        <mat-option value="Dust">Dust</mat-option>
-        <mat-option value="Food">Food</mat-option>
+        <mat-option *ngFor="let allergy of allergies" [value]="allergy">{{ allergy }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Confirmación de Propiedad -->
     <mat-form-field appearance="fill">
-      <mat-label>Ownership Confirmation</mat-label>
+      <mat-label>Confirmación de Propiedad</mat-label>
       <mat-select formControlName="ownershipConfirmation">
-        <mat-option value="Yes">Yes</mat-option>
-        <mat-option value="No">No</mat-option>
+        <mat-option *ngFor="let option of yesNoOptions" [value]="option">{{ option }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Botón de envío -->
     <button mat-raised-button color="primary" type="submit" [disabled]="predictionForm.invalid || isLoading">
-      {{ isLoading ? 'Processing...' : 'Predict' }}
+      {{ isLoading ? 'Procesando...' : 'Predecir' }}
     </button>
   </form>
 
@@ -173,7 +136,7 @@
 
   <!-- Resultado de la predicción -->
   <div *ngIf="predictionResult" class="result-container">
-    <h3>Result:</h3>
+    <h3>Resultado:</h3>
     <p>{{ predictionResult.message }}</p>
   </div>
 </div>
