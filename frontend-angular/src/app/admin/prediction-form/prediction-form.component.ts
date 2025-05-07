@@ -2,11 +2,23 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PredictionService } from '../../services/prediction.service'; // Ajusta la ruta según tu estructura
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-prediction-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule], // Necesario para formularios
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatFormFieldModule, // Habilitar animaciones para Angular Material
+  ], // Necesario para formularios y Angular Material
   templateUrl: './prediction-form.component.html',
   styleUrls: ['./prediction-form.component.css']
 })

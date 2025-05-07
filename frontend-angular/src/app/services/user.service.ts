@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,33 +16,39 @@ export class UserService {
     return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
   }
 
-  // Obtener todos los usuarios
-  getAllUsers(): Observable<any> {
-    if (this.isBrowser()) {
-      const token = localStorage.getItem('token'); // Obtener el token del localStorage
-      if (token) {
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Añadir el token a los encabezados
-        return this.http.get(`${this.apiUrl}/users`, { headers });
-      } else {
-        throw new Error('No hay token de autenticación');
-      }
-    } else {
+  // Obtener el token de localStorage y agregar a los encabezados
+  private getAuthHeaders(): HttpHeaders {
+    if (!this.isBrowser()) {
       throw new Error('localStorage no está disponible en este entorno');
     }
+
+    const token = localStorage.getItem('token'); // Obtener el token del localStorage
+    if (!token) {
+      throw new Error('No hay token de autenticación');
+    }
+    
+    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  // Obtener todos los usuarios
+  getAllUsers(): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.apiUrl}/users`, { headers }).pipe(
+      catchError(err => {
+        console.error('Error al obtener los usuarios:', err);
+        return throwError(err);
+      })
+    );
   }
 
   // Eliminar un usuario por su ID
   deleteUser(userId: string): Observable<any> {
-    if (this.isBrowser()) {
-      const token = localStorage.getItem('token'); // Obtener el token del localStorage
-      if (token) {
-        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`); // Añadir el token a los encabezados
-        return this.http.delete(`${this.apiUrl}/users/${userId}`, { headers });
-      } else {
-        throw new Error('No hay token de autenticación');
-      }
-    } else {
-      throw new Error('localStorage no está disponible en este entorno');
-    }
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.apiUrl}/users/${userId}`, { headers }).pipe(
+      catchError(err => {
+        console.error('Error al eliminar el usuario:', err);
+        return throwError(err);
+      })
+    );
   }
 }
