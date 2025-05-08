@@ -3,129 +3,140 @@
 
   <form [formGroup]="predictionForm" (ngSubmit)="onSubmit()">
 
-    <!-- Tipo de mascota -->
-    <mat-form-field appearance="fill">
-      <mat-label>Tipo de mascota</mat-label>
-      <mat-select formControlName="type">
-        <mat-option *ngFor="let type of animalTypes" [value]="type">{{ type }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!-- 1. Información Básica y Física -->
+    <div class="accordion">
+      <div class="accordion-header" (click)="toggleSection('basicInfo')" [class.active]="isSectionOpen.basicInfo">
+        Información Básica y Física
+      </div>
+      <div class="accordion-body" [class.active]="isSectionOpen.basicInfo">
+        <div class="form-group">
+          <label for="type">Tipo de mascota</label>
+          <select id="type" formControlName="type">
+            <option *ngFor="let type of animalTypes" [value]="type">{{ type }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="breed">Raza</label>
+          <select id="breed" formControlName="breed">
+            <option *ngFor="let breed of breeds" [value]="breed">{{ breed }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sex">Sexo</label>
+          <select id="sex" formControlName="sex">
+            <option *ngFor="let sex of sexes" [value]="sex">{{ sex }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="size">Tamaño</label>
+          <select id="size" formControlName="size">
+            <option *ngFor="let size of sizes" [value]="size">{{ size }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="weight">Peso</label>
+          <select id="weight" formControlName="weight">
+            <option *ngFor="let weight of weights" [value]="weight">{{ weight }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
-    <!-- Raza -->
-    <mat-form-field appearance="fill">
-      <mat-label>Raza</mat-label>
-      <mat-select formControlName="breed">
-        <mat-option *ngFor="let breed of breeds" [value]="breed">{{ breed }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!-- 2. Salud -->
+    <div class="accordion">
+      <div class="accordion-header" (click)="toggleSection('vaccines')" [class.active]="isSectionOpen.vaccines">
+        Salud
+      </div>
+      <div class="accordion-body" [class.active]="isSectionOpen.vaccines">
+        <div class="form-group">
+          <label for="vaccines">Vacunas</label>
+          <select id="vaccines" formControlName="vaccines">
+            <option *ngFor="let vaccine of vaccines" [value]="vaccine">{{ vaccine }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="sterilized">Esterilizado</label>
+          <select id="sterilized" formControlName="sterilized">
+            <option *ngFor="let option of yesNoOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="medicalConditions">Condiciones Médicas</label>
+          <select id="medicalConditions" formControlName="medicalConditions">
+            <option *ngFor="let condition of medicalConditions" [value]="condition">{{ condition }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="allergies">Alergias</label>
+          <select id="allergies" formControlName="allergies">
+            <option *ngFor="let allergy of allergies" [value]="allergy">{{ allergy }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
-    <!-- Sexo -->
-    <mat-form-field appearance="fill">
-      <mat-label>Sexo</mat-label>
-      <mat-select formControlName="sex">
-        <mat-option *ngFor="let sex of sexes" [value]="sex">{{ sex }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!-- 3. Comportamiento -->
+    <div class="accordion">
+      <div class="accordion-header" (click)="toggleSection('behaviorPeople')" [class.active]="isSectionOpen.behaviorPeople">
+        Comportamiento
+      </div>
+      <div class="accordion-body" [class.active]="isSectionOpen.behaviorPeople">
+        <div class="form-group">
+          <label for="activityLevel">Nivel de Actividad</label>
+          <select id="activityLevel" formControlName="activityLevel">
+            <option *ngFor="let level of activityLevels" [value]="level">{{ level }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="behaviorPeople">Comportamiento con Personas</label>
+          <select id="behaviorPeople" formControlName="behaviorPeople">
+            <option *ngFor="let behavior of behaviors" [value]="behavior">{{ behavior }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="behaviorAnimals">Comportamiento con Animales</label>
+          <select id="behaviorAnimals" formControlName="behaviorAnimals">
+            <option *ngFor="let behavior of behaviors" [value]="behavior">{{ behavior }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
-    <!-- Tamaño -->
-    <mat-form-field appearance="fill">
-      <mat-label>Tamaño</mat-label>
-      <mat-select formControlName="size">
-        <mat-option *ngFor="let size of sizes" [value]="size">{{ size }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Peso -->
-    <mat-form-field appearance="fill">
-      <mat-label>Peso</mat-label>
-      <mat-select formControlName="weight">
-        <mat-option *ngFor="let weight of weights" [value]="weight">{{ weight }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Vacunas -->
-    <mat-form-field appearance="fill">
-      <mat-label>Vacunas</mat-label>
-      <mat-select formControlName="vaccines">
-        <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine">{{ vaccine }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Esterilizado -->
-    <mat-form-field appearance="fill">
-      <mat-label>Esterilizado</mat-label>
-      <mat-select formControlName="sterilized">
-        <mat-option *ngFor="let option of yesNoOptions" [value]="option">{{ option }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Nivel de Actividad -->
-    <mat-form-field appearance="fill">
-      <mat-label>Nivel de Actividad</mat-label>
-      <mat-select formControlName="activityLevel">
-        <mat-option *ngFor="let level of activityLevels" [value]="level">{{ level }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Comportamiento con Personas -->
-    <mat-form-field appearance="fill">
-      <mat-label>Comportamiento con Personas</mat-label>
-      <mat-select formControlName="behaviorPeople">
-        <mat-option *ngFor="let behavior of behaviors" [value]="behavior">{{ behavior }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Comportamiento con Animales -->
-    <mat-form-field appearance="fill">
-      <mat-label>Comportamiento con Animales</mat-label>
-      <mat-select formControlName="behaviorAnimals">
-        <mat-option *ngFor="let behavior of behaviors" [value]="behavior">{{ behavior }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Estado de Aprobación -->
-    <mat-form-field appearance="fill">
-      <mat-label>Estado de Aprobación</mat-label>
-      <mat-select formControlName="approvalStatus">
-        <mat-option *ngFor="let status of ['aprobada', 'pendiente', 'rechazada']" [value]="status">{{ status }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Estado -->
-    <mat-form-field appearance="fill">
-      <mat-label>Estado</mat-label>
-      <mat-select formControlName="status">
-        <mat-option *ngFor="let status of ['disponible', 'adoptado', 'fallecido']" [value]="status">{{ status }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Condiciones Médicas -->
-    <mat-form-field appearance="fill">
-      <mat-label>Condiciones Médicas</mat-label>
-      <mat-select formControlName="medicalConditions">
-        <mat-option *ngFor="let condition of medicalConditions" [value]="condition">{{ condition }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Alergias -->
-    <mat-form-field appearance="fill">
-      <mat-label>Alergias</mat-label>
-      <mat-select formControlName="allergies">
-        <mat-option *ngFor="let allergy of allergies" [value]="allergy">{{ allergy }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <!-- Confirmación de Propiedad -->
-    <mat-form-field appearance="fill">
-      <mat-label>Confirmación de Propiedad</mat-label>
-      <mat-select formControlName="ownershipConfirmation">
-        <mat-option *ngFor="let option of yesNoOptions" [value]="option">{{ option }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <!-- 4. Estado y Situación -->
+    <div class="accordion">
+      <div class="accordion-header" (click)="toggleSection('approvalStatus')" [class.active]="isSectionOpen.approvalStatus">
+        Estado y Situación
+      </div>
+      <div class="accordion-body" [class.active]="isSectionOpen.approvalStatus">
+        <div class="form-group">
+          <label for="approvalStatus">Estado de Aprobación</label>
+          <select id="approvalStatus" formControlName="approvalStatus">
+            <option *ngFor="let status of ['aprobada', 'pendiente', 'rechazada']" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Estado Actual</label>
+          <select id="status" formControlName="status">
+            <option *ngFor="let status of ['disponible', 'adoptado', 'fallecido']" [value]="status">{{ status }}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="ownershipConfirmation">Confirmación de Propiedad</label>
+          <select id="ownershipConfirmation" formControlName="ownershipConfirmation">
+            <option *ngFor="let option of yesNoOptions" [value]="option">{{ option }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
 
     <!-- Botón de envío -->
-    <button mat-raised-button color="primary" type="submit" [disabled]="predictionForm.invalid || isLoading">
+    <button type="submit" [disabled]="predictionForm.invalid || isLoading">
       {{ isLoading ? 'Procesando...' : 'Predecir' }}
+    </button>
+
+    <!-- Botón de Limpiar -->
+    <button type="button" (click)="resetForm()" class="clear-btn">
+    Limpiar Formulario
     </button>
   </form>
 

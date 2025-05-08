@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PredictionService } from '../../services/prediction.service'; // Ajusta la ruta según tu estructura
+import { PredictionService } from '../services/prediction.service'; // Ajusta la ruta según tu estructura
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
