@@ -350,8 +350,9 @@ router.get('/predicciones', authMiddleware, async (req, res) => {
 });
 
 // Ruta para predecir con weka
-router.post('/predic', async (req, res) => {
+router.post('/predic', authMiddleware, async (req, res) => {
   try {
+    // Validación de los datos de entrada
     const validation = validateInput(req.body); // Asegúrate de definir la validación de input en este archivo
     if (!validation.isValid) {
       return res.status(400).json({
@@ -360,8 +361,10 @@ router.post('/predic', async (req, res) => {
       });
     }
 
+    // Realizar la predicción
     const predictionResult = await predictFromData(req.body);
 
+    // Verificar si la predicción fue exitosa
     if (!predictionResult.success) {
       return res.status(400).json({
         success: false,
@@ -371,14 +374,16 @@ router.post('/predic', async (req, res) => {
       });
     }
 
-    // Guardar la predicción en la base de datos
+    // Guardar la predicción en la base de datos, asociando el userId del usuario autenticado
+    const userId = req.user ? req.user.id : null;  // Si el usuario está autenticado, usamos su userId
     await Prediction.create({
       inputData: req.body,
       result: predictionResult.prediction,
       message: predictionResult.message,
-      userId: req.user ? req.user.id : null
+      userId: userId  // Aquí asociamos el userId a la predicción
     });
 
+    // Responder con el resultado de la predicción
     res.status(200).json({
       success: true,
       prediction: predictionResult.prediction,
@@ -386,6 +391,7 @@ router.post('/predic', async (req, res) => {
     });
 
   } catch (error) {
+    // Si ocurre un error, lo capturamos y mostramos detalles
     console.error('Error completo:', {
       message: error.message,
       stack: error.stack,

@@ -8,7 +8,7 @@
 @attribute Vacunas {Rabia,Parvovirus,Leptospirosis,'Hepatitis Infecciosa Canina',Moquillo}
 @attribute Esterilizado {Si,No}
 @attribute Nivel_Actividad {Alto,Bajo,Medio}
-@attribute Comportamiento_Personas {Timido,Agresivo,Amigable,Territorial}
+@attribute Comportamiento_Personas {Timido,Agresivo,Sociable,Territorial}
 @attribute Comportamiento_Animales {Territorial,Agresivo,Sociable,Timido}
 @attribute Estado_Aprobacion {aprobada,pendiente,rechazada}
 @attribute Estado {disponible,adoptado,fallecido}
