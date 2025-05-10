@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PredictionService } from '../../services/prediction.service';  // Importando el servicio
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-prediction-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule,MatProgressBarModule, ],
   templateUrl: './prediction-form.component.html',
   styleUrls: ['./prediction-form.component.css']
 })
@@ -84,6 +85,8 @@ export class PredictionFormComponent {
         next: (result) => {
           this.predictionResult = result; // Suponemos que la respuesta tiene una propiedad 'message'
           this.isLoading = false;
+                  // Deshabilitar todos los campos del formulario después de la predicción
+        this.disableFormFields();
         },
         error: (err) => {
           this.errorMessage = err.message || 'Error al realizar la predicción';
@@ -92,6 +95,13 @@ export class PredictionFormComponent {
       });
     }
   }
+
+  // Método para deshabilitar todos los campos del formulario
+disableFormFields() {
+  Object.keys(this.predictionForm.controls).forEach(field => {
+    this.predictionForm.get(field)?.disable(); // Deshabilita el campo
+  });
+}
 
   // Método para resetear el formulario y resultados
   resetForm() {
