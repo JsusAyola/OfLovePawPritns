@@ -1,0 +1,26 @@
+.history-container {
+  padding: 20px;
+}
+
+.loading-message {
+  font-style: italic;
+}
+
+.error-message {
+  color: red;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 15px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+strong {
+  color: #333;
+}

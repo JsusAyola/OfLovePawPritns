@@ -1,2 +1,29 @@
-<h1>HOLA PRUEBA</h1>
-<H2>CRY</H2>
+<div class="history-container">
+  <h2>Historial de Predicciones</h2>
+
+  <!-- Mostrar mensaje de carga -->
+  <div *ngIf="isLoading" class="loading-message">
+    Cargando historial de predicciones...
+  </div>
+
+  <!-- Mostrar mensaje de error -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Mostrar historial de predicciones -->
+  <div *ngIf="!isLoading && !errorMessage && predictionHistory.length > 0">
+    <ul>
+      <li *ngFor="let prediction of predictionHistory">
+        <p><strong>Fecha:</strong> {{ prediction.date | date:'short' }}</p>
+        <p><strong>Resultado:</strong> {{ prediction.result }}</p>
+        <!-- Otros detalles de la predicción que quieras mostrar -->
+      </li>
+    </ul>
+  </div>
+
+  <!-- Mensaje cuando no hay predicciones -->
+  <div *ngIf="!isLoading && !errorMessage && predictionHistory.length === 0">
+    No hay predicciones en el historial.
+  </div>
+</div>

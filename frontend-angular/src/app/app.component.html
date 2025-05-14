@@ -1,5 +1,5 @@
 <div class="wrapper">
-  <!-- Navbar -->
+
   <nav class="navbar navbar-expand-md bg-body-tertiary py-3">
     <div class="container">
       <a class="navbar-brand fw-bold" routerLink="/">
@@ -13,36 +13,29 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item"><a class="nav-link active" routerLink="/">Inicio</a></li>
-          
-          <!-- Dropdown para Mascotas -->
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mascotas</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" routerLink="/dogs">Perros</a></li>
               <li><a class="dropdown-item" routerLink="/cats">Gatos</a></li>
-              <li><a class="dropdown-item" routerLink="/proximamente">Próximamente</a></li>
             </ul>
           </li>
 
-          <!-- Opción de ¿Cómo adoptar? -->
           <li class="nav-item"><a class="nav-link" routerLink="/como-adoptar">¿Cómo adoptar?</a></li>
 
-          <!-- Opción de Funciones de Roles -->
           <li class="nav-item"><a class="nav-link" routerLink="/funciones-roles">Funciones de Roles</a></li>
 
-          <!-- Dropdown para ¿Predicción? -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">¿Predicción?</a>
             <ul class="dropdown-menu">
-              <!-- Cambiado el modal por una ruta -->
               <li><a class="dropdown-item" routerLink="/prediction-form">Form Prediction</a></li>
-              <li><a class="dropdown-item" routerLink="/prediction-history">History Prediction</a></li>
+              <li><a class="dropdown-item" (click)="checkLoginAndNavigateToHistory()">History Prediction</a></li>
             </ul>
           </li>
         </ul>
 
         <div class="d-flex align-items-center">
-          <!-- Menú de sesión -->
           <div *ngIf="userName; else loginButton" class="dropdown ms-2">
             <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ userName }}
@@ -64,13 +57,10 @@
     </div>
   </nav>
 
-  <!-- Contenido principal -->
   <div class="main-content">
-    <router-outlet></router-outlet> <!-- Aquí se mostrarán las páginas según la ruta -->
-  </div>
+    <router-outlet></router-outlet> </div>
 </div>
 
-<!-- Footer -->
 <footer>
   <p>&copy; 2024 Adopta un Perro. Todos los derechos reservados.</p>
   <a routerLink="/">Volver al inicio</a>

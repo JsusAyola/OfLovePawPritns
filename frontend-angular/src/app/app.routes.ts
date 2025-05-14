@@ -3,7 +3,6 @@ import { InicioComponent } from './home/inicio/inicio.component';
 import { ComoAdoptarRoutes } from './home/como-adoptar/como-adoptar.routes';
 import { CatsComponent } from './pages/pets/cats/cats.component';
 import { DogsComponent } from './pages/pets/dogs/dogs.component';
-import { ProximamenteComponent } from './pages/pets/proximamente/proximamente.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
@@ -39,7 +38,6 @@ export const routes: Routes = [
     { path: 'funciones-roles', component: FuncionesRolesComponent },
     { path: 'cats', component: CatsComponent },
     { path: 'dogs', component: DogsComponent },
-    { path: 'proximamente', component: ProximamenteComponent },
     { path: 'auth/login', component: LoginComponent },
     { path: 'auth/register', component: RegisterComponent },
     { path: 'auth/reset-password', component: ResetPasswordComponent },
