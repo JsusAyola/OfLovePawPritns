@@ -248,6 +248,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Ruta para obtener predicciones guardadas
+router.get('/predicciones', authMiddleware, async (req, res) => {
+  try {
+    // Ahora predicciones solo se filtrarán por el userId del usuario logueado
+    const preds = await Prediction.find({ userId: req.user.id }).sort({ date: -1 });
+    res.json(preds);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener predicciones' });
+  }
+});
+
 // Ruta para obtener una mascota por su ID
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
@@ -336,16 +347,6 @@ router.put('/:id/increment-interested', async (req, res) => {
   } catch (error) {
     console.error('Error al incrementar el contador de interesados:', error);
     res.status(500).json({ error: 'Error en el servidor' });
-  }
-});
-
-// Ruta para obtener predicciones guardadas
-router.get('/predicciones', authMiddleware, async (req, res) => {
-  try {
-    const preds = await Prediction.find({ userId: req.user.id }).sort({ date: -1 });
-    res.json(preds);
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener predicciones' });
   }
 });
 
