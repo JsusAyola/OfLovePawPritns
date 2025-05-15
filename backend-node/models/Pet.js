@@ -140,7 +140,17 @@ const PetSchema = new mongoose.Schema({
   ownershipConfirmation: {
     type: Boolean,
     required: true
+  },
+    ownershipConfirmation: {
+    type: Boolean,
+    required: true
+  },
+
+  interestedCount: {
+    type: Number,
+    default: 0
   }
+
 }, { timestamps: true });
 
 module.exports = mongoose.model('Pet', PetSchema);

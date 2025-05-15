@@ -235,6 +235,28 @@ router.get('/cuidador', authMiddleware, async (req, res) => {
   }
 });
 
+// Ruta para obtener mascotas aprobadas y disponibles filtradas por tipo
+router.get('/disponibles', async (req, res) => {
+  try {
+    const { type } = req.query;  // Recibe ?type=Gato o ?type=Perro
+
+    const filter = {
+      approvalStatus: 'aprobada',
+      status: 'disponible',
+    };
+    if (type) {
+      filter.type = type;
+    }
+
+    const mascotas = await Pet.find(filter);
+    res.json(mascotas);
+  } catch (error) {
+    console.error('Error al obtener mascotas disponibles:', error);
+    res.status(500).send('Error en el servidor');
+  }
+});
+
+
 // Ruta para obtener todas las mascotas
 router.get('/', async (req, res) => {
   try {
@@ -316,22 +338,7 @@ router.delete('/delete/:id', authMiddleware, async (req, res) => {
   }
 });
 
-
-// Ruta para obtener todas las mascotas aprobadas y disponibles
-router.get('/disponibles', async (_, res) => {
-  try {
-    const mascotas = await Pet.find({ 
-      approvalStatus: 'aprobada', 
-      status: 'disponible' 
-    });
-    res.json(mascotas);
-  } catch (error) {
-    console.error('Error al obtener mascotas disponibles:', error);
-    res.status(500).send('Error en el servidor');
-  }
-});
-
-// Ruta para incrementar el contador de interesados
+// Ruta para incrementar el contador de interesados                ¡Arreglar!
 router.put('/:id/increment-interested', async (req, res) => {
   try {
     const pet = await Pet.findById(req.params.id);
