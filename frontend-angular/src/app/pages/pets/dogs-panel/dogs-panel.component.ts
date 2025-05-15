@@ -10,12 +10,12 @@ import { Location } from '@angular/common';
   selector: 'app-dogs-panel',
   templateUrl: './dogs-panel.component.html',
   styleUrls: ['./dogs-panel.component.css'],
-  imports: [CommonModule, FormsModule, RouterModule] // Incluye RouterModule aquí
+  imports: [CommonModule, FormsModule, RouterModule],
 })
 export class DogsPanelComponent implements OnInit {
   dogs: any[] = [];
   filteredDogs: any[] = [];
-  selectedFilter: string = 'all';
+  selectedFilter: string = 'disponible'; // Filtro predeterminado solo disponibles
   selectedDog: any = null;
 
   constructor(private petService: PetService, private router: Router, private location: Location) {}
@@ -24,17 +24,17 @@ export class DogsPanelComponent implements OnInit {
     this.loadDogs();
   }
 
-  loadDogs() {
-    this.petService.getPetsByCuidador().subscribe(
-      (pets) => {
-        this.dogs = pets.filter(pet => pet.type.toLowerCase() === 'perro');
-        this.applyFilter();
-      },
-      (error) => {
-        console.error('Error al cargar los perros:', error);
-      }
-    );
-  }
+loadDogs() {
+  this.petService.getAvailableApprovedPets('Perro').subscribe(
+    (pets) => {
+      this.dogs = pets;
+      this.applyFilter();
+    },
+    (error) => {
+      console.error('Error al cargar los perros:', error);
+    }
+  );
+}
 
   filterDogs(status: string) {
     this.selectedFilter = status;
@@ -42,11 +42,7 @@ export class DogsPanelComponent implements OnInit {
   }
 
   applyFilter() {
-    if (this.selectedFilter === 'all') {
-      this.filteredDogs = this.dogs;
-    } else {
-      this.filteredDogs = this.dogs.filter(dog => dog.status === this.selectedFilter);
-    }
+    this.filteredDogs = this.dogs.filter(dog => dog.status === this.selectedFilter);
   }
 
   editPet(dog: any) {
@@ -108,7 +104,7 @@ export class DogsPanelComponent implements OnInit {
       title: '¡Éxito!',
       text: message,
       showConfirmButton: false,
-      timer: 2000
+      timer: 2000,
     });
   }
 
@@ -118,7 +114,7 @@ export class DogsPanelComponent implements OnInit {
       title: 'Error',
       text: message,
       showConfirmButton: false,
-      timer: 2000
+      timer: 2000,
     });
   }
 
@@ -126,8 +122,7 @@ export class DogsPanelComponent implements OnInit {
     this.router.navigate(['/cuidador/solicitudes-dogs'], { queryParams: { tipoMascota: 'Perro' } });
   }
 
-  // Función para volver a la página anterior
   volverAtras(): void {
-    this.location.back(); // Navega hacia la página anterior
+    this.location.back();
   }
 }

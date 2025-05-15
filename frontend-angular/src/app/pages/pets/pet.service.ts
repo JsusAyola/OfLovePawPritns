@@ -108,4 +108,10 @@ export class PetService {
     const headers = this.createAuthorizationHeader();
     return this.http.put<any>(`http://localhost:5000/api/solicitudes/aprobar/${solicitudId}`, { action }, { headers });
   }
+
+  // Método para obtener mascotas aprobadas y disponibles
+  getAvailableApprovedPets(type?: string): Observable<any[]> {
+  const params = type ? { params: { type } } : {};
+  return this.http.get<any[]>(`${this.apiUrl}/disponibles`, params);
+}
 }

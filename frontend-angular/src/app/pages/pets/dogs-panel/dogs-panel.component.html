@@ -4,14 +4,8 @@
 
   <!-- Botones de filtro con íconos -->
   <div class="filter-buttons">
-    <button (click)="filterDogs('all')" [class.active]="selectedFilter === 'all'" class="btn btn-secondary">
-      <i class="fas fa-paw"></i> Todos
-    </button>
     <button (click)="filterDogs('disponible')" [class.active]="selectedFilter === 'disponible'" class="btn btn-secondary">
       <i class="fas fa-heart"></i> Disponibles
-    </button>
-    <button (click)="filterDogs('adoptada')" [class.active]="selectedFilter === 'adoptada'" class="btn btn-secondary">
-      <i class="fas fa-home"></i> Adoptados
     </button>
     <button (click)="verSolicitudesDeAdopcion()" class="btn btn-requests">
       <i class="fas fa-file-alt"></i> Solicitudes
@@ -37,14 +31,9 @@
       </div>
     </div>
     <ng-template #noDogs>
-      <p class="no-pets-message">🐾 No hay perros que coincidan con el filtro.</p>
+      <p class="no-pets-message">🐾 No hay perros disponibles.</p>
     </ng-template>
   </div>
-
-  <!-- Botón Retroceder con estilo mejorado -->
-  <button (click)="volverAtras()" class="btn btn-back">
-    <i class="fas fa-arrow-left"></i> Volver
-  </button>
 
   <!-- Modal de edición -->
   <div class="edit-modal" *ngIf="selectedDog" [class.show]="selectedDog">
@@ -97,4 +86,9 @@
       </form>
     </div>
   </div>
+
+  <!-- Botón Retroceder con estilo mejorado -->
+  <button (click)="volverAtras()" class="btn btn-back">
+    <i class="fas fa-arrow-left"></i> Volver
+  </button>
 </div>

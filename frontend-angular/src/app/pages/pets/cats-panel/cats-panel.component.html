@@ -4,26 +4,19 @@
 
   <!-- Botones de filtro con íconos -->
   <div class="filter-buttons">
-    <button (click)="filterCats('all')" [class.active]="selectedFilter === 'all'" class="btn btn-secondary">
-      <i class="fas fa-paw"></i> Todos
-    </button>
     <button (click)="filterCats('disponible')" [class.active]="selectedFilter === 'disponible'" class="btn btn-secondary">
       <i class="fas fa-heart"></i> Disponibles
     </button>
-    <button (click)="filterCats('adoptada')" [class.active]="selectedFilter === 'adoptada'" class="btn btn-secondary">
-      <i class="fas fa-home"></i> Adoptados
-    </button>
-    <button (click)="verSolicitudesDeAdopcion()" class="btn btn-requests">
+    <button (click)="verSolicitudesDeAdopcion()" [class.active]="selectedFilter === 'solicitudes'" class="btn btn-requests">
       <i class="fas fa-file-alt"></i> Solicitudes
     </button>
   </div>
 
   <!-- Lista de gatos con efecto "hover" mejorado -->
-  <div class="section">
-    <h3><i class="fas fa-cat"></i> Gatos Publicados</h3>
+  <div class="section" *ngIf="selectedFilter === 'disponible'">
+    <h3><i class="fas fa-cat"></i> Gatos Disponibles</h3>
     <div *ngIf="filteredCats.length > 0; else noCats" class="pets-list">
       <div *ngFor="let cat of filteredCats" class="pet-card">
-        <div *ngIf="cat.status === 'adoptada'" class="ribbon">🏠 Adoptado</div>
         <img [src]="'http://localhost:5000/' + cat.image" alt="{{ cat.name }}" class="pet-image" />
         <div class="pet-info">
           <h4>{{ cat.name }}</h4>
@@ -37,61 +30,63 @@
       </div>
     </div>
     <ng-template #noCats>
-      <p class="no-cats-message">😿 No hay gatos que coincidan con el filtro.</p>
+      <p class="no-cats-message">😿 No hay gatos disponibles para adopción.</p>
     </ng-template>
   </div>
 
+  <!-- Aquí puedes agregar otro div para solicitudes si quieres mostrar algo distinto -->
+
   <!-- Modal de edición (dentro del div.cats-panel) -->
-<div class="edit-modal" *ngIf="selectedCat" [class.show]="selectedCat">
-  <div class="modal-overlay" (click)="closeEditModal()"></div>
-  <div class="modal-content">
-    <button class="modal-close" (click)="closeEditModal()">
-      <i class="fas fa-times"></i>
-    </button>
-    <h3>✏️ Editar {{ selectedCat.name }}</h3>
-    
-    <form (submit)="updatePet()">
-      <div class="form-group">
-        <label for="name"><i class="fas fa-tag"></i> Nombre:</label>
-        <input type="text" [(ngModel)]="selectedCat.name" name="name" required />
-      </div>
+  <div class="edit-modal" *ngIf="selectedCat" [class.show]="selectedCat">
+    <div class="modal-overlay" (click)="closeEditModal()"></div>
+    <div class="modal-content">
+      <button class="modal-close" (click)="closeEditModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h3>✏️ Editar {{ selectedCat.name }}</h3>
       
-      <div class="form-group">
-        <label for="breed"><i class="fas fa-paw"></i> Raza:</label>
-        <input type="text" [(ngModel)]="selectedCat.breed" name="breed" required />
-      </div>
-      
-      <div class="form-row">
+      <form (submit)="updatePet()">
         <div class="form-group">
-          <label for="birthDate"><i class="fas fa-birthday-cake"></i> Fecha de Nacimiento:</label>
-          <input type="date" [(ngModel)]="selectedCat.birthDate" name="birthDate" />
+          <label for="name"><i class="fas fa-tag"></i> Nombre:</label>
+          <input type="text" [(ngModel)]="selectedCat.name" name="name" required />
         </div>
         
         <div class="form-group">
-          <label for="sex"><i class="fas fa-venus-mars"></i> Sexo:</label>
-          <select [(ngModel)]="selectedCat.sex" name="sex">
-            <option value="Macho">Macho</option>
-            <option value="Hembra">Hembra</option>
-          </select>
+          <label for="breed"><i class="fas fa-paw"></i> Raza:</label>
+          <input type="text" [(ngModel)]="selectedCat.breed" name="breed" required />
         </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="vaccines"><i class="fas fa-syringe"></i> Vacunas:</label>
-        <textarea [(ngModel)]="selectedCat.vaccines" name="vaccines" rows="2"></textarea>
-      </div>
-      
-      <div class="modal-actions">
-        <button type="button" class="btn btn-cancel" (click)="closeEditModal()">
-          <i class="fas fa-times"></i> Cancelar
-        </button>
-        <button type="submit" class="btn btn-save">
-          <i class="fas fa-save"></i> Guardar Cambios
-        </button>
-      </div>
-    </form>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="birthDate"><i class="fas fa-birthday-cake"></i> Fecha de Nacimiento:</label>
+            <input type="date" [(ngModel)]="selectedCat.birthDate" name="birthDate" />
+          </div>
+          
+          <div class="form-group">
+            <label for="sex"><i class="fas fa-venus-mars"></i> Sexo:</label>
+            <select [(ngModel)]="selectedCat.sex" name="sex">
+              <option value="Macho">Macho</option>
+              <option value="Hembra">Hembra</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="vaccines"><i class="fas fa-syringe"></i> Vacunas:</label>
+          <textarea [(ngModel)]="selectedCat.vaccines" name="vaccines" rows="2"></textarea>
+        </div>
+        
+        <div class="modal-actions">
+          <button type="button" class="btn btn-cancel" (click)="closeEditModal()">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+          <button type="submit" class="btn btn-save">
+            <i class="fas fa-save"></i> Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
   <!-- Botón Retroceder con estilo mejorado -->
   <button (click)="irAtras()" class="btn btn-back">

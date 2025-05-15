@@ -10,18 +10,18 @@ import { Location } from '@angular/common';
   selector: 'app-cats-panel',
   templateUrl: './cats-panel.component.html',
   styleUrls: ['./cats-panel.component.css'],
-  imports: [CommonModule, FormsModule, RouterModule] // Incluye RouterModule aquí
+  imports: [CommonModule, FormsModule, RouterModule]
 })
 export class CatsPanelComponent implements OnInit {
   cats: any[] = [];
   filteredCats: any[] = [];
-  selectedFilter: string = 'all';
+  selectedFilter: string = 'disponible';
   selectedCat: any = null;
 
   constructor(
     private petService: PetService,
     private router: Router,
-    private location: Location // Inyecta Location para navegar atrás
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -29,9 +29,9 @@ export class CatsPanelComponent implements OnInit {
   }
 
   loadCats() {
-    this.petService.getPetsByCuidador().subscribe(
+    this.petService.getAvailableApprovedPets('Gato').subscribe(
       (pets) => {
-        this.cats = pets.filter(pet => pet.type.toLowerCase() === 'gato');
+        this.cats = pets;
         this.applyFilter();
       },
       (error) => {
@@ -42,16 +42,30 @@ export class CatsPanelComponent implements OnInit {
 
   filterCats(status: string) {
     this.selectedFilter = status;
-    this.applyFilter();
+    if (status === 'disponible') {
+      this.loadCats();
+    } else if (status === 'solicitudes') {
+      this.verSolicitudesDeAdopcion();
+    }
   }
 
   applyFilter() {
-    if (this.selectedFilter === 'all') {
-      this.filteredCats = this.cats;
-    } else {
-      this.filteredCats = this.cats.filter(cat => cat.status === this.selectedFilter);
-    }
+    // Como ya traemos solo disponibles, solo asignamos
+    this.filteredCats = this.cats;
   }
+
+incrementInterest(pet: any) {
+  this.petService.incrementInterestedCount(pet._id).subscribe(
+    (res) => {
+      pet.interestedCount = (pet.interestedCount || 0) + 1; // actualizar visualmente localmente
+      Swal.fire('¡Listo!', 'El contador de interesados se actualizó.', 'success');
+    },
+    (err) => {
+      Swal.fire('Error', 'No se pudo actualizar el contador.', 'error');
+    }
+  );
+}
+
 
   editPet(cat: any) {
     this.selectedCat = { ...cat };
@@ -130,8 +144,7 @@ export class CatsPanelComponent implements OnInit {
     this.router.navigate(['/cuidador/solicitudes-cats'], { queryParams: { tipoMascota: 'Gato' } });
   }
 
-  // Método para retroceder a la página anterior
   irAtras(): void {
-    this.location.back(); // Este método navega hacia la página anterior
+    this.location.back();
   }
 }
