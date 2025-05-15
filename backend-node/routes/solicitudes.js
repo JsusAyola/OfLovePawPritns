@@ -88,22 +88,26 @@ router.post('/create', authMiddleware, async (req, res) => {
 
     await adoptionForm.save();
 
-    // 3. Crear la nueva solicitud de adopción
-    const solicitud = new AdoptionRequest({
-      mascota_id,
-      adoptador_id,
-      cuidador_id,
-      formId: adoptionForm._id,
-      estado: 'pendiente'
-    });
+// 3. Crear la nueva solicitud de adopción
+const solicitud = new AdoptionRequest({
+  mascota_id,
+  adoptador_id,
+  cuidador_id,
+  formId: adoptionForm._id,
+  estado: 'pendiente'
+});
 
-    await solicitud.save();
+await solicitud.save();
 
-    res.status(201).json({ 
-      _id: solicitud._id, 
-      reuseForm: adoptionForm.reuseForm,
-      message: 'Solicitud creada con éxito.' 
-    });
+// --- Incrementar contador de interesados de forma atómica y eficiente ---
+await Pet.findByIdAndUpdate(mascota_id, { $inc: { interestedCount: 1 } });
+
+res.status(201).json({ 
+  _id: solicitud._id, 
+  reuseForm: adoptionForm.reuseForm,
+  message: 'Solicitud creada con éxito.' 
+});
+
 
   } catch (error) {
     console.error('Error en el servidor:', error);
@@ -256,7 +260,7 @@ router.put('/aprobar/:id', authMiddleware, validateRequestAction, async (req, re
       req.params.id,
       { 
         estado: 'aprobada', 
-        fecha_decision: new Date()  // Guardar la fecha actual de aprobación
+        fecha_decision: new Date()
       },
       { new: true }
     ).populate('adoptador_id', 'firstName lastName email')
@@ -266,16 +270,10 @@ router.put('/aprobar/:id', authMiddleware, validateRequestAction, async (req, re
       return res.status(404).json({ error: 'Solicitud no encontrada' });
     }
 
-    res.json({ 
-      success: true,
-      solicitud: {
-        _id: solicitud._id,
-        estado: solicitud.estado,
-        fecha_decision: solicitud.fecha_decision || new Date(), // Enviamos la fecha directamente como Date si está guardada
-        mascota: solicitud.mascota_id,
-        adoptador: solicitud.adoptador_id
-      }
-    });
+    await Pet.findByIdAndUpdate(solicitud.mascota_id._id, { status: 'adoptado' });
+
+    // Enviar respuesta completa sin modificar
+    res.json(solicitud);
   } catch (error) {
     console.error('Error al aprobar solicitud:', error);
     res.status(500).json({ error: 'Error interno del servidor' });

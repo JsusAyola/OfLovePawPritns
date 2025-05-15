@@ -6,7 +6,7 @@ const adoptionRequestSchema = new mongoose.Schema({
     cuidador_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     formId: { type: mongoose.Schema.Types.ObjectId, ref: 'AdoptionForm', required: true },
     estado: { type: String, enum: ['pendiente', 'aprobada', 'rechazada'], default: 'pendiente' },
-    fecha_decision: { type: Date, default: null }, 
+     fecha_solicitud: { type: Date, default: Date.now },
 }, { timestamps: true });
 
 module.exports = mongoose.model('AdoptionRequest', adoptionRequestSchema);

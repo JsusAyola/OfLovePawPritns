@@ -8,6 +8,7 @@ const router = express.Router();
 const adminMiddleware = require('../middleware/adminMiddleware');
 const { predictFromData } = require('../helpers/wekaService'); // Cambié esto
 const Prediction = require('../models/Prediction'); // 👈 modelo que debes crear
+const AdoptionRequest = require('../models/AdoptionRequest'); // Ajusta la ruta según tu estructura
 
 // Configuración de multer para subir imágenes
 const storage = multer.diskStorage({
@@ -163,10 +164,12 @@ router.get('/pendientes', authMiddleware, adminMiddleware, async (req, res) => {
   }
 });
 
-// Ruta para aprobar una mascota
+// Ruta para aprobar una mascota y actualizar la solicitud
 router.put('/aprobar/:id', authMiddleware, adminMiddleware, async (req, res) => {
   const { id } = req.params;
+
   try {
+    // Buscar la mascota
     const pet = await Pet.findById(id);
     if (!pet) {
       return res.status(404).json({ msg: 'Mascota no encontrada' });
@@ -176,21 +179,36 @@ router.put('/aprobar/:id', authMiddleware, adminMiddleware, async (req, res) => 
       return res.status(400).json({ msg: 'La mascota ya está aprobada' });
     }
 
+    // Actualizar estado de la mascota
     pet.approvalStatus = 'aprobada';
-    pet.status = 'disponible';  // Asegúrate de que este campo se actualice
+    pet.status = 'disponible';
     await pet.save();
-    
-    res.json({ msg: 'Mascota aprobada y disponible' });
+
+    // Buscar la solicitud pendiente asociada a esta mascota
+    const solicitud = await AdoptionRequest.findOne({
+      mascota_id: id,
+      estado: 'pendiente'
+    });
+
+    if (solicitud) {
+      solicitud.estado = 'aprobada';
+      solicitud.fecha_decision = new Date();
+      await solicitud.save();
+    }
+
+    res.json({ msg: 'Mascota aprobada y solicitud actualizada' });
   } catch (error) {
     console.error('Error al aprobar la mascota:', error);
     res.status(500).json({ msg: 'Error al aprobar la mascota' });
   }
 });
 
-// Ruta para rechazar una mascota
+// Ruta para rechazar una mascota y actualizar la solicitud
 router.put('/rechazar/:id', authMiddleware, adminMiddleware, async (req, res) => {
   const { id } = req.params;
+
   try {
+    // Buscar la mascota
     const pet = await Pet.findById(id);
     if (!pet) {
       return res.status(404).json({ msg: 'Mascota no encontrada' });
@@ -200,15 +218,29 @@ router.put('/rechazar/:id', authMiddleware, adminMiddleware, async (req, res) =>
       return res.status(400).json({ msg: 'La mascota ya está rechazada' });
     }
 
+    // Actualizar estado de la mascota
     pet.approvalStatus = 'rechazada';
     await pet.save();
-    
-    res.json({ msg: 'Mascota rechazada' });
+
+    // Buscar la solicitud pendiente asociada a esta mascota
+    const solicitud = await AdoptionRequest.findOne({
+      mascota_id: id,
+      estado: 'pendiente'
+    });
+
+    if (solicitud) {
+      solicitud.estado = 'rechazada';
+      solicitud.fecha_decision = new Date();
+      await solicitud.save();
+    }
+
+    res.json({ msg: 'Mascota rechazada y solicitud actualizada' });
   } catch (error) {
     console.error('Error al rechazar la mascota:', error);
     res.status(500).json({ msg: 'Error al rechazar la mascota' });
   }
 });
+
 
 // Ruta para obtener todas las mascotas de un cuidador específico
 router.get('/cuidador', authMiddleware, async (req, res) => {

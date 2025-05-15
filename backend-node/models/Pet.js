@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const AdoptionRequest = require('../models/AdoptionRequest'); // Ajusta la ruta según tu estructura
+
 const PetSchema = new mongoose.Schema({
   name: {
     type: String,
