@@ -91,7 +91,7 @@ export class MiCuentaComponent implements OnInit {
         phone: this.userPhone
       };
   
-      this.http.put(`${this.apiUrl}/update`, updatedData, { headers }).subscribe(
+      this.http.put('http://localhost:5000/api/user/update', updatedData, { headers }).subscribe(
         () => {
           const user = JSON.parse(localStorage.getItem('user') || '{}');
           user.firstName = this.userName;

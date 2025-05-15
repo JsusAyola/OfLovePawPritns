@@ -18,14 +18,14 @@
     <tbody>
       <tr *ngFor="let pred of predictionHistory">
         <td>{{ pred.date | date:'short' }}</td>
-        <td>{{ pred.pet?.type || '-' }}</td>
-        <td>{{ pred.pet?.breed || '-' }}</td>
-        <td>{{ pred.pet?.weight || '-' }}</td>
-        <td>{{ pred.pet?.vaccines || '-' }}</td>
-        <td>{{ pred.pet?.activityLevel || '-' }}</td>
-        <td>{{ pred.result?.message || '-' }}</td>
+        <td>{{ pred.inputData?.type || '-' }}</td>
+        <td>{{ pred.inputData?.breed || '-' }}</td>
+        <td>{{ pred.inputData?.weight || '-' }}</td>
+        <td>{{ pred.inputData?.vaccines || '-' }}</td>
+        <td>{{ pred.inputData?.activityLevel || '-' }}</td>
+        <td>{{ pred.message || '-' }}</td>
         <td>{{ (pred.result?.confidence * 100) | number:'1.1-1' }}%</td>
-        <td>{{ pred.status || 'desconocido' }}</td>
+        <td>{{ pred.inputData?.status || 'desconocido' }}</td>
       </tr>
     </tbody>
   </table>
