@@ -23,14 +23,18 @@ export class PredictionHistoryComponent implements OnInit {
 
   // Método para cargar el historial de predicciones
   loadPredictionHistory(): void {
+    this.isLoading = true;
+    this.errorMessage = null;
+
     this.predictionService.getUserPredictions().subscribe({
       next: (history) => {
-        this.predictionHistory = history;  // Asignamos el historial recibido
-        this.isLoading = false;             // Ocultamos el indicador de carga
+        // Asegurarnos que history es un arreglo y que cada item tenga estructura esperada
+        this.predictionHistory = Array.isArray(history) ? history : [];
+        this.isLoading = false;
       },
       error: (err) => {
         this.errorMessage = 'Error al cargar el historial de predicciones';
-        this.isLoading = false;             // Ocultamos el indicador de carga
+        this.isLoading = false;
       }
     });
   }

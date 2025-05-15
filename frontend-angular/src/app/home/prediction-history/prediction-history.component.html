@@ -1,29 +1,44 @@
 <div class="history-container">
   <h2>Historial de Predicciones</h2>
 
-  <!-- Mostrar mensaje de carga -->
+  <table class="predictions-table" *ngIf="!isLoading && !errorMessage && predictionHistory.length > 0">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Raza</th>
+        <th>Peso</th>
+        <th>Vacunas</th>
+        <th>Nivel de Actividad</th>
+        <th>Mensaje</th>
+        <th>Probabilidad</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pred of predictionHistory">
+        <td>{{ pred.date | date:'short' }}</td>
+        <td>{{ pred.pet?.type || '-' }}</td>
+        <td>{{ pred.pet?.breed || '-' }}</td>
+        <td>{{ pred.pet?.weight || '-' }}</td>
+        <td>{{ pred.pet?.vaccines || '-' }}</td>
+        <td>{{ pred.pet?.activityLevel || '-' }}</td>
+        <td>{{ pred.result?.message || '-' }}</td>
+        <td>{{ (pred.result?.confidence * 100) | number:'1.1-1' }}%</td>
+        <td>{{ pred.status || 'desconocido' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
   <div *ngIf="isLoading" class="loading-message">
     Cargando historial de predicciones...
   </div>
 
-  <!-- Mostrar mensaje de error -->
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-  <!-- Mostrar historial de predicciones -->
-  <div *ngIf="!isLoading && !errorMessage && predictionHistory.length > 0">
-    <ul>
-      <li *ngFor="let prediction of predictionHistory">
-        <p><strong>Fecha:</strong> {{ prediction.date | date:'short' }}</p>
-        <p><strong>Resultado:</strong> {{ prediction.result }}</p>
-        <!-- Otros detalles de la predicción que quieras mostrar -->
-      </li>
-    </ul>
-  </div>
-
-  <!-- Mensaje cuando no hay predicciones -->
-  <div *ngIf="!isLoading && !errorMessage && predictionHistory.length === 0">
+  <div *ngIf="!isLoading && !errorMessage && predictionHistory.length === 0" class="no-data">
     No hay predicciones en el historial.
   </div>
 </div>
