@@ -24,19 +24,16 @@ export class CatsComponent implements OnInit {
     }
   }
 
-  loadCats() {
-    this.petService.getPets().subscribe(
-      (pets) => {
-        this.cats = pets.filter(
-          (pet) => pet.type.toLowerCase() === 'gato' && pet.approvalStatus.toLowerCase() === 'aprobada'
-        );
-      },
-      (error) => {
-        console.error('Error al obtener los gatos:', error);
-      }
-    );
-  }
-  
+loadCats() {
+  this.petService.getAvailableApprovedPets('Gato').subscribe(
+    (pets) => {
+      this.cats = pets;  // ya vienen solo aprobadas y disponibles
+    },
+    (error) => {
+      console.error('Error al obtener los gatos:', error);
+    }
+  );
+}
 
   calculateCatAge(birthDate: string): string {
     const birth = new Date(birthDate);

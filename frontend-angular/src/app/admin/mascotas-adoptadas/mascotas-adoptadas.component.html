@@ -1,6 +1,12 @@
 <div class="adoptadas-container">
+  <button class="btn-back" (click)="volverAtras()" aria-label="Volver">
+    <i class="fas fa-arrow-left"></i> Volver
+  </button>
+
   <h1>Mascotas Adoptadas</h1>
+
   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  
   <div *ngIf="mascotasAdoptadas.length === 0 && !errorMessage" class="no-mascotas">
     No tienes mascotas adoptadas registradas.
   </div>

@@ -244,7 +244,7 @@ export class AdopcionFormComponent implements OnInit {
             showConfirmButton: true,
             timer: 3000
           }).then(() => {
-            this.router.navigate(['/mis-solicitudes']);
+            this.router.navigate(['/dashboard/historial-solicitudes']);
           });
         },
         error: (error) => {

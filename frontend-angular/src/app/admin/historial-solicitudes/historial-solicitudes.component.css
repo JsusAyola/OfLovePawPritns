@@ -1,12 +1,13 @@
 /* Contenedor principal */
 .historial-solicitudes {
-  padding: 40px;
+  padding: 40px 20px;
   max-width: 900px;
   margin: auto;
   background: linear-gradient(135deg, #e3f2fd, #bbdefb);
   border-radius: 20px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
   animation: fadeIn 0.6s ease-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Título */
@@ -40,6 +41,8 @@
   display: flex;
   align-items: center;
   animation: slideIn 0.4s ease;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .solicitud-item:hover {
@@ -53,16 +56,20 @@
   height: 120px;
   object-fit: cover;
   border-radius: 12px;
-  margin-right: 20px;
   transition: transform 0.4s ease;
 }
 .solicitud-item:hover .mascota-imagen {
   transform: rotate(-5deg) scale(1.05);
 }
 
+/* Contenedor de texto para que se adapte */
+.solicitud-item > div:last-child {
+  flex: 1 1 250px;
+}
+
 /* Textos de la solicitud */
 .solicitud-item p {
-  margin: 10px 0;
+  margin: 8px 0;
   font-size: 1.1rem;
   color: #333;
 }
@@ -72,25 +79,33 @@
 
 /* Estado de la solicitud */
 .estado {
-  font-weight: bold;
+  font-weight: 600;
   padding: 6px 12px;
   border-radius: 12px;
   font-size: 0.95rem;
-  color: #fff;
+  color: #1e1e1e;
   display: inline-block;
   text-align: center;
   margin-top: 15px;
   transition: background-color 0.3s ease;
+  background-color: #cce5ff;
+  border: 1px solid #1e88e5;
 }
 
 .estado-aprobada {
-  background-color: #4caf50;
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
 }
 .estado-rechazada {
-  background-color: #f44336;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
 }
-.estado-en-proceso {
-  background-color: #ffa726;
+.estado-pendiente {
+  background-color: #fff3cd;
+  color: #856404;
+  border-color: #ffeeba;
 }
 
 /* Animaciones */
@@ -114,4 +129,65 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .historial-solicitudes {
+    padding: 20px 10px;
+  }
+
+  .solicitud-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mascota-imagen {
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+
+  .solicitud-item > div:last-child {
+    flex: none;
+    width: 100%;
+  }
+
+  .solicitud-item p {
+    font-size: 1rem;
+  }
+
+  .historial-solicitudes h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .solicitud-item p {
+    font-size: 0.9rem;
+  }
+
+  .historial-solicitudes h2 {
+    font-size: 1.7rem;
+  }
+}
+.btn-back {
+  background: none;
+  border: none;
+  color: #1e88e5;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-bottom: 15px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+}
+
+.btn-back:hover {
+  color: #1565c0;
+  text-decoration: underline;
 }

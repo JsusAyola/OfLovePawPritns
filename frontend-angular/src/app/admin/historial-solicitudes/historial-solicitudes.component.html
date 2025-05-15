@@ -1,28 +1,42 @@
 <div class="historial-solicitudes">
+  <button class="btn-back" (click)="volverAtras()" aria-label="Volver">
+    ← Volver
+  </button>
+  
   <h2>Historial de Solicitudes</h2>
+  
   <div *ngIf="solicitudes.length === 0">
     <p>No tienes solicitudes de adopción registradas.</p>
   </div>
+  
   <div *ngFor="let solicitud of solicitudes" class="solicitud-item">
     <div>
-      <img [src]="solicitud.mascotaImagen" alt="Imagen de Mascota" class="mascota-imagen" *ngIf="solicitud.mascotaImagen; else noImage"/>
+      <img 
+        [src]="solicitud.mascotaImagen" 
+        alt="Imagen de Mascota" 
+        class="mascota-imagen" 
+        *ngIf="solicitud.mascotaImagen; else noImage"
+      />
       <ng-template #noImage>Imagen no disponible</ng-template>
     </div>
-    <p><strong>Tipo de Mascota:</strong> {{ solicitud.mascotaTipo || 'No disponible' }}</p>
-    <p><strong>Nombre de Mascota:</strong> {{ solicitud.mascotaNombre || 'No disponible' }}</p>
-    <p><strong>Fecha de Solicitud:</strong> {{ solicitud.fechaSolicitud | date:'dd/MM/yyyy' }}</p>
-    <p>
-      <strong>Estado:</strong>
-      <span
-        class="estado"
-        [ngClass]="{
-          'estado-aprobada': solicitud.estado === 'aprobada',
-          'estado-rechazada': solicitud.estado === 'rechazada',
-          'estado-en-proceso': solicitud.estado === 'en proceso'
-        }"
-      >
-        {{ solicitud.estado | titlecase }}
-      </span>
-    </p>
+    
+    <div>
+      <p><strong>Tipo de Mascota:</strong> {{ solicitud.mascotaTipo || 'No disponible' }}</p>
+      <p><strong>Nombre de Mascota:</strong> {{ solicitud.mascotaNombre || 'No disponible' }}</p>
+      <p><strong>Fecha de Solicitud:</strong> {{ solicitud.fechaSolicitud | date:'dd/MM/yyyy' }}</p>
+      <p>
+        <strong>Estado:</strong>
+        <span 
+          class="estado"
+          [ngClass]="{
+            'estado-aprobada': solicitud.estado === 'aprobada',
+            'estado-rechazada': solicitud.estado === 'rechazada',
+            'estado-pendiente': solicitud.estado === 'pendiente'
+          }"
+        >
+          {{ solicitud.estado | titlecase }}
+        </span>
+      </p>
+    </div>
   </div>
 </div>

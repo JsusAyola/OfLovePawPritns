@@ -24,18 +24,16 @@ export class DogsComponent implements OnInit {
     }
   }
 
-  loadDogs() {
-    this.petService.getPets().subscribe(
-      (pets) => {
-        this.dogs = pets.filter(
-          (pet) => pet.type.toLowerCase() === 'perro' && pet.approvalStatus.toLowerCase() === 'aprobada'
-        );
-      },
-      (error) => {
-        console.error('Error al obtener los perros:', error);
-      }
-    );
-  }
+loadDogs() {
+  this.petService.getAvailableApprovedPets('Perro').subscribe(
+    (pets) => {
+      this.dogs = pets;  // ya vienen solo aprobadas y disponibles
+    },
+    (error) => {
+      console.error('Error al obtener los perros:', error);
+    }
+  );
+}
 
   calculateDogAge(birthDate: string): string {
     const birth = new Date(birthDate);
