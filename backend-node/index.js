@@ -1,22 +1,13 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
 const { execSync } = require('child_process');
+const connectDB = require('./config/db'); // 👈 conexión a MongoDB modular
 
 dotenv.config();
 
-// Importación de rutas
-const authRoutes = require('./routes/auth');
-const dashboardRoutes = require('./routes/dashboard');
-const petRoutes = require('./routes/pett');
-const solicitudesRoutes = require('./routes/solicitudes');
-const userRoutes = require('./routes/userRoutes');
-const adminRoutes = require('./routes/adminRoutes');
-
-const errorHandler = require('./middleware/errorHandler');
-
+// Crear app y puerto
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -29,20 +20,27 @@ try {
   console.log(`⚠️ No se pudo liberar el puerto ${PORT}, puede que no estuviera en uso.`);
 }
 
-// Configuración de CORS
+// Conectar a la base de datos
+connectDB();
+
+// Middleware
 app.use(cors({
   origin: ['http://localhost:4200', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-
-// Middleware para parsear JSON
 app.use(express.json());
-
-// Servir archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Definición de rutas
+// Rutas
+const authRoutes = require('./routes/auth');
+const dashboardRoutes = require('./routes/dashboard');
+const petRoutes = require('./routes/pett');
+const solicitudesRoutes = require('./routes/solicitudes');
+const userRoutes = require('./routes/userRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const errorHandler = require('./middleware/errorHandler');
+
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -51,26 +49,15 @@ app.use('/api/pets', petRoutes);
 app.use('/api/solicitudes', solicitudesRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/pett', petRoutes);  // ¡revisar que esta ruta sea correcta y no cause conflicto!
+app.use('/api/pett', petRoutes);  // ⚠️ Podés revisar si esto es duplicado/conflictivo
 
-// Manejo de rutas inexistentes
+// Ruta 404
 app.all('*', (req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// Middleware global para manejo de errores (debe ir después de todas las rutas)
+// Middleware global de errores
 app.use(errorHandler);
-
-// Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log('✅ Conectado a MongoDB'))
-  .catch(err => {
-    console.error('❌ Error conectando a MongoDB:', err.message);
-    process.exit(1);
-  });
 
 // Iniciar servidor
 app.listen(PORT, () => {
