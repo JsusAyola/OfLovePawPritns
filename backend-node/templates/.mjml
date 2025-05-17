@@ -1,0 +1,28 @@
+<mjml>
+  <mj-body background-color="#f2f2f2">
+    <mj-section background-color="#ff6b6b" padding="20px">
+      <mj-column>
+        <mj-image width="48px" src="https://cdn-icons-png.flaticon.com/512/616/616430.png" />
+        <mj-text font-size="28px" color="#ffffff" align="center">Restablece tu contraseña</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#ffffff" padding="30px">
+      <mj-column>
+        <mj-text font-size="16px" color="#333">¡Hola!<br/>Hemos recibido una solicitud...</mj-text>
+        <mj-button background-color="#ff6b6b" href="{{FRONTEND_URL}}/auth/change-password/{{RESET_TOKEN}}">
+          Restablecer Contraseña
+        </mj-button>
+        <mj-text font-size="14px" color="#777">Este enlace expirará en 1 hora...</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#fafafa" padding="20px">
+      <mj-column>
+        <mj-text font-size="12px" color="#999" align="center">
+          © 2024 PawPrints Of Love. <a href="{{FRONTEND_URL}}" style="color:#ff6b6b;">Visitar el sitio</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

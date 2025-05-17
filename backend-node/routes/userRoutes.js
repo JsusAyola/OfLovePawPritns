@@ -31,10 +31,7 @@ router.put('/update', authMiddleware, async (req, res) => {
     user.firstName = firstName;
     user.lastName = lastName;
     user.birthDate = birthDate;
-
-    if (user.role === 'cuidador') {
-      user.phone = phone;
-    }
+    user.phone = phone;
 
     await user.save();
     res.json(user);

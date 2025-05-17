@@ -30,12 +30,18 @@ const UserSchema = new mongoose.Schema({
     enum: ['cuidador', 'adoptador', 'administrador'], // Incluye el rol de administrador
     required: true,
   },
-  phone: {
-    type: String,
-    required: function () {
-      return this.role === 'cuidador'; // Teléfono requerido solo si es cuidador
-    },
+phone: {
+  type: String,
+  required: function() {
+    // Ahora obligatorio sólo para cuidador y adoptador
+    return ['cuidador','adoptador'].includes(this.role);
   },
+  match: [
+    /^3\d{9}$/,
+    'El teléfono debe iniciar en 3 y tener 10 dígitos'
+  ]
+},
+
   mascotas: [
     {
       type: mongoose.Schema.Types.ObjectId,
