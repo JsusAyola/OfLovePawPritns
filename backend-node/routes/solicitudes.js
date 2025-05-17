@@ -280,12 +280,11 @@ router.put('/aprobar/:id', authMiddleware, validateRequestAction, async (req, re
   }
 });
 
-
 // Rechazar solicitud
 router.put('/rechazar/:id', authMiddleware, validateRequestAction, async (req, res) => {
   try {
     const { motivo } = req.body;
-    
+
     if (!motivo || motivo.trim() === '') {
       return res.status(400).json({ error: 'Debe proporcionar un motivo' });
     }
@@ -294,19 +293,24 @@ router.put('/rechazar/:id', authMiddleware, validateRequestAction, async (req, r
       req.params.id,
       { 
         estado: 'rechazada', 
-        motivo_rechazo: motivo,
+        motivoRechazo: motivo, // Cambiado a camelCase para coincidir con el esquema
         fecha_decision: new Date() 
       },
       { new: true }
-    ).populate('adoptador_id', 'firstName lastName email')
-     .populate('mascota_id', 'name breed');
-    
+    )
+    .populate('adoptador_id', 'firstName lastName email')
+    .populate('mascota_id', 'name breed');
+
+    if (!solicitud) {
+      return res.status(404).json({ error: 'Solicitud no encontrada' });
+    }
+
     res.json({ 
       success: true,
       solicitud: {
         _id: solicitud._id,
         estado: solicitud.estado,
-        motivo_rechazo: solicitud.motivo_rechazo,
+        motivoRechazo: solicitud.motivoRechazo,
         fecha_decision: solicitud.fecha_decision,
         mascota: solicitud.mascota_id,
         adoptador: solicitud.adoptador_id
