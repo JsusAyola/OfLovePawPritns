@@ -46,11 +46,12 @@
       <label for="UserRole">Rol</label>
       <input type="text" class="form-control" [value]="userRole" disabled />
       
-      <!-- Campo de Teléfono para Cuidadores -->
-      <div *ngIf="userRole === 'cuidador'">
-        <label for="UserPhone">Teléfono</label>
-        <input type="text" class="form-control" [(ngModel)]="userPhone" />
-      </div>
+<!-- Campo de Teléfono para Cuidadores y Adoptadores -->
+<div *ngIf="userRole === 'cuidador' || userRole === 'adoptador'">
+  <label for="UserPhone">Teléfono</label>
+  <input type="text" class="form-control" [(ngModel)]="userPhone" />
+</div>
+
 
       <label for="UserAge">Edad</label>
       <input type="text" class="form-control" [value]="userAge" disabled />

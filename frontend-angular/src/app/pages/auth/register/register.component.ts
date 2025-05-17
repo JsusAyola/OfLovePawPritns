@@ -27,19 +27,26 @@ export class RegisterComponent {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
-    const today = new Date();
-    
-    const minDate = new Date(today.getFullYear() - 80, today.getMonth(), today.getDate());
-    const minDateString = minDate.toISOString().split('T')[0]; 
+const today = new Date();
 
-    const maxDateString = today.toISOString().split('T')[0];
+  // Fecha mínima: hace 80 años
+  const eightyYearsAgo = new Date(
+    today.getFullYear() - 80,
+    today.getMonth(),
+    today.getDate()
+  );
+  this.minDate = eightyYearsAgo.toISOString().split('T')[0];
 
-    const minAgeDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-    const minAgeDateString = minAgeDate.toISOString().split('T')[0];
+  // Fecha máxima: hoy menos 18 años (no permite menores de 18)
+  const eighteenYearsAgo = new Date(
+    today.getFullYear() - 18,
+    today.getMonth(),
+    today.getDate()
+  );
+  this.maxDate = eighteenYearsAgo.toISOString().split('T')[0];
 
-    this.birthDate = minAgeDateString;  
-    this.minDate = minDateString;    
-    this.maxDate = maxDateString;    
+  // Preseleccionar por defecto la fecha límite de 18 años atrás
+  this.birthDate = this.maxDate;   
   }
 
   onSubmit(registerForm: NgForm) {
@@ -74,7 +81,7 @@ export class RegisterComponent {
         password: this.password,
         birthDate: this.birthDate,
         role: this.role,
-        phone: this.role === 'cuidador' ? this.phone : null,
+        phone: ['cuidador','adoptador'].includes(this.role) ? this.phone : null,
       };
 
       const birthDate = new Date(this.birthDate);

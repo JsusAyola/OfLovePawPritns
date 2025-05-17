@@ -48,11 +48,11 @@
       </select>
     </div>
 
-    <!-- Teléfono (solo visible si el rol es Cuidador) -->
-    <div class="input-container" *ngIf="role === 'cuidador'">
-      <input id="phone" name="phone" type="text" placeholder="Número de teléfono (obligatorio para cuidador)" [(ngModel)]="phone"
-             [ngClass]="{'input-error': registerForm.controls['phone'] && registerForm.controls['phone'].invalid && registerForm.controls['phone'].touched}" />
-    </div>
+<!-- Teléfono (visible si el rol es Cuidador o Adoptador) -->
+<div class="input-container" *ngIf="role === 'cuidador' || role === 'adoptador'">
+  <input id="phone" name="phone" type="text" placeholder="Número de teléfono (obligatorio para cuidador y adoptador)" [(ngModel)]="phone"
+         [ngClass]="{'input-error': registerForm.controls['phone'] && registerForm.controls['phone'].invalid && registerForm.controls['phone'].touched}" />
+</div>
 
     <!-- Botón de submit -->
     <button type="submit" class="btn-accept">Registrarse</button>
