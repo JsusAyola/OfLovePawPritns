@@ -15,6 +15,7 @@ h2 {
   letter-spacing: 1.2px;
 }
 
+/* Tabla con sombra y bordes redondeados */
 .predictions-table {
   width: 100%;
   border-collapse: collapse;
@@ -22,6 +23,9 @@ h2 {
   background: white;
   border-radius: 8px;
   overflow: hidden;
+  /* Permitir scroll horizontal en pantallas pequeñas */
+  display: block;
+  overflow-x: auto;
 }
 
 .predictions-table thead tr {
@@ -55,4 +59,50 @@ h2 {
 
 .error-message {
   color: #e74c3c;
+}
+
+/* ----------------- Responsive ----------------- */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 768px) {
+  .history-container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+  .predictions-table th,
+  .predictions-table td {
+    padding: 10px;
+    font-size: 13px;
+  }
+  .loading-message,
+  .error-message,
+  .no-data {
+    font-size: 15px;
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+  .history-container {
+    padding: 10px;
+    margin: 15px auto;
+  }
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+  }
+  .predictions-table th,
+  .predictions-table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+  .loading-message,
+  .error-message,
+  .no-data {
+    font-size: 14px;
+  }
 }

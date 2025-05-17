@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SolicitudesService } from '../../services/solicitudes.service';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-historial-solicitudes',
@@ -27,13 +28,23 @@ export class HistorialSolicitudesComponent implements OnInit {
         mascotaNombre: solicitud.mascota_id?.name,
         mascotaImagen: solicitud.mascota_id ? `http://localhost:5000/${solicitud.mascota_id.image}` : null,
         fechaSolicitud: solicitud.fecha_solicitud,
-        estado: solicitud.estado  // Asegúrate que venga aquí
+        estado: solicitud.estado,
+        motivoRechazo: solicitud.motivoRechazo
       }));
     },
     (error) => {
       console.error('Error al obtener el historial de solicitudes:', error);
     }
   );
+}
+
+mostrarMotivo(motivo: string) {
+  Swal.fire({
+    title: 'Motivo del rechazo',
+    text: motivo || 'No se proporcionó un motivo.',
+    icon: 'info',
+    confirmButtonText: 'Cerrar'
+  });
 }
 
   volverAtras() {

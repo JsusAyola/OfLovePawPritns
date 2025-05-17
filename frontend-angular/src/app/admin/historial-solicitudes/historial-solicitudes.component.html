@@ -24,19 +24,27 @@
       <p><strong>Tipo de Mascota:</strong> {{ solicitud.mascotaTipo || 'No disponible' }}</p>
       <p><strong>Nombre de Mascota:</strong> {{ solicitud.mascotaNombre || 'No disponible' }}</p>
       <p><strong>Fecha de Solicitud:</strong> {{ solicitud.fechaSolicitud | date:'dd/MM/yyyy' }}</p>
-      <p>
-        <strong>Estado:</strong>
-        <span 
-          class="estado"
-          [ngClass]="{
-            'estado-aprobada': solicitud.estado === 'aprobada',
-            'estado-rechazada': solicitud.estado === 'rechazada',
-            'estado-pendiente': solicitud.estado === 'pendiente'
-          }"
-        >
-          {{ solicitud.estado | titlecase }}
-        </span>
-      </p>
+<p>
+  <strong>Estado:</strong>
+  <span 
+    class="estado"
+    [ngClass]="{
+      'estado-aprobada': solicitud.estado === 'aprobada',
+      'estado-rechazada': solicitud.estado === 'rechazada',
+      'estado-pendiente': solicitud.estado === 'pendiente'
+    }"
+  >
+    {{ solicitud.estado | titlecase }}
+  </span>
+  <button
+    *ngIf="solicitud.estado === 'rechazada'"
+    (click)="mostrarMotivo(solicitud.motivoRechazo)"
+    class="btn-motivo"
+    aria-label="Mostrar motivo del rechazo"
+  >
+    Motivo
+  </button>
+</p>
     </div>
   </div>
 </div>

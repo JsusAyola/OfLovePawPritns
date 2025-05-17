@@ -191,3 +191,17 @@
   color: #1565c0;
   text-decoration: underline;
 }
+
+.btn-motivo {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  padding: 0;
+}
+.btn-motivo:hover {
+  color: #0056b3;
+}
