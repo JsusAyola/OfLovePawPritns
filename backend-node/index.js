@@ -25,7 +25,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:4200', 'http://localhost:3000'],
+  origin: ['https://pett-a1d97.web.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
